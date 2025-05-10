@@ -1,0 +1,38 @@
+{
+  "participants": [
+    "admin123",
+    "demo123"
+  ],
+  "messages": [
+    {
+      "senderId": "admin123",
+      "text": "Welcome to DataMatch! How are you finding the platform so far?",
+      "timestamp": "2025-05-08T16:30:59.170Z",
+      "read": true
+    },
+    {
+      "senderId": "demo123",
+      "text": "Thank you! I'm really enjoying it. The interface is intuitive and I've already connected with some interesting professionals.",
+      "timestamp": "2025-05-08T17:30:59.170Z",
+      "read": true
+    },
+    {
+      "senderId": "admin123",
+      "text": "That's great to hear! Have you tried the LinkedIn integration feature?",
+      "timestamp": "2025-05-09T16:30:59.171Z",
+      "read": true
+    },
+    {
+      "senderId": "demo123",
+      "text": "Not yet, but I plan to try it today. Does it pull in all my professional experience automatically?",
+      "timestamp": "2025-05-09T17:30:59.171Z",
+      "read": true
+    },
+    {
+      "senderId": "admin123",
+      "text": "Yes, it pulls in your work history, education, and skills. It really helps create better matches based on professional compatibility!",
+      "timestamp": "2025-05-10T15:30:59.171Z",
+      "read": true
+    }
+  ]
+}

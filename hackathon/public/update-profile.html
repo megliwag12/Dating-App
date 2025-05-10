@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMatch - Update Profile</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      color: #ff4b91;
+      border-bottom: 2px solid #ff4b91;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #8a2be2;
+      margin-top: 30px;
+    }
+    .btn {
+      background-color: #ff4b91;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #e6006e;
+    }
+    .status {
+      margin: 20px 0;
+      padding: 15px;
+      border-radius: 5px;
+    }
+    .success {
+      background-color: rgba(22, 216, 118, 0.15);
+      border-left: 5px solid #16d876;
+    }
+    .error {
+      background-color: rgba(255, 94, 94, 0.15);
+      border-left: 5px solid #ff5e5e;
+    }
+    code {
+      background-color: #f8f8f8;
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    pre {
+      background-color: #f8f8f8;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>DataMatch Profile Update Tool</h1>
+  <p>This tool will update your profile page with the latest components and force a refresh. The updated components include:</p>
+  <ul>
+    <li>Deep Data Integration (Spotify, Purchase History, etc.)</li>
+    <li>Reviews & Verifications System</li>
+    <li>Debug Tools</li>
+  </ul>
+  
+  <h2>Update Steps</h2>
+  <ol>
+    <li>Choose a theme: Light or Dark</li>
+    <li>Click the "Update Profile" button below</li>
+    <li>Wait for the confirmation message</li>
+    <li>Follow the link to the refreshed profile page</li>
+  </ol>
+
+  <div style="margin-bottom: 20px;">
+    <h3>Choose Theme:</h3>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <label style="display: flex; align-items: center;">
+        <input type="radio" name="theme" value="light" checked>
+        <span style="margin-left: 8px;">Light Theme (Default)</span>
+      </label>
+      <label style="display: flex; align-items: center;">
+        <input type="radio" name="theme" value="dark">
+        <span style="margin-left: 8px;">Dark Theme (Pink/Purple - Twitter Style)</span>
+      </label>
+      <label style="display: flex; align-items: center;">
+        <input type="radio" name="theme" value="sleek">
+        <span style="margin-left: 8px;">Sleek Professional (Blue, Grey, White, Black)</span>
+      </label>
+    </div>
+  </div>
+
+  <button id="update-btn" class="btn">Update Profile</button>
+
+  <div id="status"></div>
+  
+  <div id="next-steps" style="display: none;">
+    <h2>Next Steps</h2>
+    <p>Your profile has been updated! Please click the link below to see the changes:</p>
+    <p><a href="profile.html?v=fresh" id="profile-link" class="btn">Go to Updated Profile</a></p>
+  </div>
+  
+  <script>
+    document.getElementById('update-btn').addEventListener('click', function() {
+      const statusElement = document.getElementById('status');
+      statusElement.innerHTML = '<p>Updating profile components... please wait.</p>';
+      statusElement.className = '';
+
+      // Get selected theme
+      const selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+      console.log('Selected theme:', selectedTheme);
+
+      // Force refresh of cached files by appending timestamp
+      const timestamp = new Date().getTime();
+      
+      // Create direct script tags to add our components
+      const scriptContent = `
+// Ensure our debug component is available globally
+window.debugComponentLoaded = true;
+console.log('Debug component globally available');
+
+// Add debug button
+function addDebugButton() {
+  if (document.getElementById('debug-btn')) return;
+  
+  const debugBtn = document.createElement('button');
+  debugBtn.id = 'debug-btn';
+  debugBtn.textContent = 'Debug Info';
+  debugBtn.style.position = 'fixed';
+  debugBtn.style.bottom = '20px';
+  debugBtn.style.left = '20px';
+  debugBtn.style.zIndex = '9999';
+  debugBtn.style.padding = '10px 15px';
+  debugBtn.style.backgroundColor = '#8a2be2';
+  debugBtn.style.color = 'white';
+  debugBtn.style.border = 'none';
+  debugBtn.style.borderRadius = '6px';
+  debugBtn.style.cursor = 'pointer';
+  
+  debugBtn.addEventListener('click', function() {
+    showDebugInfo();
+  });
+  
+  document.body.appendChild(debugBtn);
+  console.log('Debug button added to page');
+}
+
+// Show debug information when the button is clicked
+function showDebugInfo() {
+  console.log('=== DEBUG INFO ===');
+  
+  // Show all script elements
+  console.log('Loaded scripts:');
+  document.querySelectorAll('script').forEach((script, index) => {
+    console.log(\`\${index + 1}. \${script.src || 'inline script'}\`);
+  });
+  
+  // Check for deep data elements
+  console.log('\\nDeep Data Elements:');
+  ['connect-spotify', 'spotify-data', 'purchase-data', 'dietary-form', 'texting-data'].forEach(id => {
+    const el = document.getElementById(id);
+    console.log(\`#\${id}: \${el ? 'Found' : 'NOT FOUND'}\`);
+  });
+  
+  // Check for review elements
+  console.log('\\nReview Elements:');
+  ['ex-partners-content', 'friends-content', 'work-content', 'family-content'].forEach(id => {
+    const el = document.getElementById(id);
+    console.log(\`#\${id}: \${el ? 'Found' : 'NOT FOUND'}\`);
+  });
+  
+  const reviewTabs = document.querySelectorAll('.review-tab');
+  console.log('\\nReview Tabs:', reviewTabs.length);
+  reviewTabs.forEach((tab, index) => {
+    console.log(\`\${index + 1}. data-target="\${tab.getAttribute('data-target')}"\`);
+  });
+  
+  // Create and show debug info modal
+  const debugInfo = document.createElement('div');
+  debugInfo.id = 'debug-info-modal';
+  debugInfo.style.position = 'fixed';
+  debugInfo.style.top = '50%';
+  debugInfo.style.left = '50%';
+  debugInfo.style.transform = 'translate(-50%, -50%)';
+  debugInfo.style.backgroundColor = 'white';
+  debugInfo.style.padding = '20px';
+  debugInfo.style.borderRadius = '10px';
+  debugInfo.style.boxShadow = '0 0 20px rgba(0,0,0,0.3)';
+  debugInfo.style.zIndex = '10000';
+  debugInfo.style.maxWidth = '500px';
+  debugInfo.style.maxHeight = '80vh';
+  debugInfo.style.overflow = 'auto';
+  
+  // Add content to the modal
+  debugInfo.innerHTML = \`
+    <h3 style="margin-top: 0; color: #8a2be2; border-bottom: 1px solid #eee; padding-bottom: 10px;">Debug Information</h3>
+    <p>Check browser console for detailed output (F12 or right-click → Inspect → Console).</p>
+    
+    <h4 style="margin-bottom: 5px; color: #ff4b91;">Component Status:</h4>
+    <ul style="margin-top: 5px;">
+      <li><strong>Deep Data:</strong> <span id="debug-dd-status">Checking...</span></li>
+      <li><strong>Reviews:</strong> <span id="debug-rev-status">Checking...</span></li>
+      <li><strong>Debug:</strong> <span id="debug-dbg-status">Active</span></li>
+    </ul>
+    
+    <h4 style="margin-bottom: 5px; color: #ff4b91;">Active Tab:</h4>
+    <p id="debug-active-tab">Checking...</p>
+    
+    <h4 style="margin-bottom: 5px; color: #ff4b91;">Spotify Connect Button:</h4>
+    <p id="debug-spotify-btn">Checking...</p>
+    
+    <h4 style="margin-bottom: 5px; color: #ff4b91;">Review Tabs:</h4>
+    <p id="debug-review-tabs">Checking...</p>
+    
+    <div style="text-align: center; margin-top: 20px;">
+      <button id="close-debug-modal" style="padding: 8px 16px; background: #8a2be2; color: white; border: none; border-radius: 4px; cursor: pointer;">Close</button>
+    </div>
+  \`;
+  
+  document.body.appendChild(debugInfo);
+  
+  // Update the status fields
+  document.getElementById('debug-dd-status').textContent = window.deepDataComponentLoaded ? 'Loaded' : 'Not Loaded';
+  document.getElementById('debug-rev-status').textContent = window.reviewsComponentLoaded ? 'Loaded' : 'Not Loaded';
+  
+  // Get active tab
+  const activeTab = document.querySelector('.profile-nav-item.active');
+  document.getElementById('debug-active-tab').textContent = activeTab ? activeTab.getAttribute('data-target') : 'None';
+  
+  // Check spotify button
+  const spotifyBtn = document.getElementById('connect-spotify');
+  document.getElementById('debug-spotify-btn').textContent = spotifyBtn ? 'Found' : 'Not Found';
+  
+  // Check review tabs
+  const numReviewTabs = document.querySelectorAll('.review-tab').length;
+  document.getElementById('debug-review-tabs').textContent = numReviewTabs + ' tabs found';
+  
+  // Add close button functionality
+  document.getElementById('close-debug-modal').addEventListener('click', function() {
+    document.body.removeChild(debugInfo);
+  });
+}
+
+// Initialize Spotify functionality
+function initSpotifyIntegration() {
+  console.log('Initializing Spotify integration');
+  const spotifyConnectBtn = document.getElementById('connect-spotify');
+  const spotifyData = document.getElementById('spotify-data');
+  
+  if (spotifyConnectBtn) {
+    console.log('Found Spotify connect button');
+    
+    // Remove any existing event listeners
+    const newButton = spotifyConnectBtn.cloneNode(true);
+    spotifyConnectBtn.parentNode.replaceChild(newButton, spotifyConnectBtn);
+    
+    // Add event listener
+    newButton.addEventListener('click', async function() {
+      try {
+        // Show connecting status
+        this.textContent = 'Connecting to Spotify...';
+        this.disabled = true;
+        
+        // Simulate connection delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Update button
+        this.textContent = 'Refresh Spotify Data';
+        this.disabled = false;
+        
+        // Show spotify data section
+        if (spotifyData) {
+          spotifyData.style.display = 'block';
+          
+          // Add mock data
+          spotifyData.innerHTML = '<h4>Spotify Connected!</h4>';
+          spotifyData.innerHTML += '<p>Your music taste shows you enjoy a diverse range of genres.</p>';
+          spotifyData.innerHTML += '<h5>Top Artists:</h5>';
+          spotifyData.innerHTML += '<ul><li>Taylor Swift</li><li>The Weeknd</li><li>Dua Lipa</li><li>Kendrick Lamar</li><li>Tame Impala</li></ul>';
+        }
+        
+        console.log('Spotify connected successfully');
+      } catch (error) {
+        console.error('Error connecting to Spotify:', error);
+        this.textContent = 'Connect with Spotify';
+        this.disabled = false;
+      }
+    });
+    
+    console.log('Spotify button initialized');
+  } else {
+    console.log('Spotify connect button not found');
+  }
+}
+
+// Initialize review tabs
+function initReviewTabs() {
+  console.log('Initializing review tabs');
+  const tabs = document.querySelectorAll('.review-tab');
+  
+  if (tabs.length > 0) {
+    console.log('Found review tabs:', tabs.length);
+    
+    tabs.forEach(tab => {
+      // Remove any existing event listeners
+      const newTab = tab.cloneNode(true);
+      tab.parentNode.replaceChild(newTab, tab);
+      
+      // Add event listener
+      newTab.addEventListener('click', function() {
+        console.log('Tab clicked:', this.getAttribute('data-target'));
+        
+        // Remove active class from all tabs
+        document.querySelectorAll('.review-tab').forEach(t => {
+          t.classList.remove('active');
+        });
+        
+        // Hide all tab content
+        document.querySelectorAll('.review-tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        
+        // Add active class to clicked tab
+        this.classList.add('active');
+        
+        // Show the selected tab content
+        const targetId = this.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId + '-content');
+        
+        if (targetContent) {
+          targetContent.classList.add('active');
+          console.log('Activated tab content:', targetId);
+        } else {
+          console.log('Target content not found:', targetId + '-content');
+        }
+      });
+    });
+    
+    console.log('Review tabs initialized');
+  } else {
+    console.log('Review tabs not found');
+  }
+}
+
+// Initialize components when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Direct script injection: Document loaded');
+  
+  // Set global flags
+  window.deepDataComponentLoaded = true;
+  window.reviewsComponentLoaded = true;
+  
+  // Add the debug button
+  addDebugButton();
+  
+  // Check if we're on the profile page
+  if (document.querySelector('.profile-content')) {
+    console.log('Profile page detected');
+    
+    // Initialize Spotify integration if deep data section exists
+    if (document.getElementById('deep-data')) {
+      console.log('Deep data section exists');
+      initSpotifyIntegration();
+    }
+    
+    // Initialize review tabs if reviews section exists
+    if (document.getElementById('reviews')) {
+      console.log('Reviews section exists');
+      initReviewTabs();
+    }
+    
+    // Add tab switcher for deep data and reviews
+    const profileNavItems = document.querySelectorAll('.profile-nav-item');
+    
+    profileNavItems.forEach(item => {
+      // Check if the item is already initialized
+      if (item.hasAttribute('data-initialized')) return;
+      
+      // Mark as initialized
+      item.setAttribute('data-initialized', 'true');
+      
+      // Clone and replace to remove any existing listeners
+      const newItem = item.cloneNode(true);
+      item.parentNode.replaceChild(newItem, item);
+      
+      // Add click event listener
+      newItem.addEventListener('click', function() {
+        const target = this.getAttribute('data-target');
+        console.log('Tab clicked:', target);
+        
+        // Remove active class from all tabs and sections
+        document.querySelectorAll('.profile-nav-item').forEach(nav => {
+          nav.classList.remove('active');
+        });
+        
+        document.querySelectorAll('.profile-section').forEach(section => {
+          section.classList.remove('active');
+        });
+        
+        // Add active class to this tab
+        this.classList.add('active');
+        
+        // Show the target section
+        const targetSection = document.getElementById(target);
+        if (targetSection) {
+          targetSection.classList.add('active');
+          console.log('Activated section:', target);
+          
+          // Initialize components in the target section
+          if (target === 'deep-data') {
+            initSpotifyIntegration();
+          }
+          
+          if (target === 'reviews') {
+            initReviewTabs();
+          }
+        }
+      });
+    });
+    
+    console.log('Tab navigation initialized');
+  }
+});
+      `;
+      
+      // Create a new script element
+      const scriptElement = document.createElement('script');
+      scriptElement.textContent = scriptContent;
+      
+      // Create CSS for components
+      const cssContent = `
+/* Direct CSS injection for components */
+.deep-data-card {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(255, 75, 145, 0.1), 0 2px 5px rgba(255, 75, 145, 0.07);
+  overflow: hidden;
+  transition: all 250ms ease;
+  border: 1px solid #f0d3e0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.deep-data-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 75, 145, 0.15), 0 5px 10px rgba(255, 75, 145, 0.1);
+  border-color: rgba(255, 75, 145, 0.6);
+}
+
+.data-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.review-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.review-tab {
+  padding: 0.75rem 1.25rem;
+  background-color: transparent;
+  border: 1px solid #f0d3e0;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 150ms ease;
+  color: #555555;
+}
+
+.review-tab:hover {
+  background-color: rgba(255, 75, 145, 0.05);
+  border-color: #ff7eb0;
+  color: #ff4b91;
+}
+
+.review-tab.active {
+  background-color: #ff4b91;
+  border-color: #ff4b91;
+  color: white;
+  box-shadow: 0 2px 10px rgba(255, 75, 145, 0.3);
+}
+
+.review-tab-content {
+  display: none;
+}
+
+.review-tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#debug-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  padding: 10px 15px;
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+      `;
+      
+      // Create a new style element
+      const styleElement = document.createElement('style');
+      styleElement.textContent = cssContent;
+      
+      // Function to inject our content
+      function injectContent() {
+        return new Promise((resolve, reject) => {
+          try {
+            // Save to localStorage to survive page reload
+            localStorage.setItem('datamatch_script_injection', scriptContent);
+            localStorage.setItem('datamatch_style_injection', cssContent);
+            localStorage.setItem('datamatch_selected_theme', selectedTheme);
+
+            // Set a flag to run the injection on profile page
+            localStorage.setItem('datamatch_auto_inject', 'true');
+            localStorage.setItem('datamatch_timestamp', timestamp.toString());
+
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        });
+      }
+      
+      // Inject the content and update the UI
+      injectContent()
+        .then(() => {
+          statusElement.innerHTML = '<p>Profile components have been updated successfully! The changes will be applied when you visit the profile page.</p>';
+          statusElement.className = 'status success';
+          document.getElementById('next-steps').style.display = 'block';
+          
+          // Update the profile link with cache-busting parameter
+          document.getElementById('profile-link').href = `profile.html?v=${timestamp}`;
+        })
+        .catch(error => {
+          statusElement.innerHTML = `<p>Error updating profile: ${error.message}</p>`;
+          statusElement.className = 'status error';
+        });
+    });
+  </script>
+  
+  <script>
+    // Auto-inject script for the profile page
+    if (window.location.pathname.endsWith('profile.html')) {
+      // Get injected content from localStorage
+      const scriptContent = localStorage.getItem('datamatch_script_injection');
+      const styleContent = localStorage.getItem('datamatch_style_injection');
+      const selectedTheme = localStorage.getItem('datamatch_selected_theme') || 'light';
+      const shouldAutoInject = localStorage.getItem('datamatch_auto_inject') === 'true';
+
+      if (shouldAutoInject && scriptContent && styleContent) {
+        // Inject the script
+        const scriptElement = document.createElement('script');
+        scriptElement.textContent = scriptContent;
+        document.head.appendChild(scriptElement);
+
+        // Inject the style
+        const styleElement = document.createElement('style');
+        styleElement.textContent = styleContent;
+        document.head.appendChild(styleElement);
+
+        // Apply dark theme if selected
+        if (selectedTheme === 'dark') {
+          // Load dark theme CSS
+          const darkThemeLink = document.createElement('link');
+          darkThemeLink.rel = 'stylesheet';
+          darkThemeLink.href = 'css/dark-theme.css?v=' + (new Date().getTime());
+          document.head.appendChild(darkThemeLink);
+
+          // Load floating hearts animation
+          const heartsScript = document.createElement('script');
+          heartsScript.src = 'js/floating-hearts.js?v=' + (new Date().getTime());
+          document.head.appendChild(heartsScript);
+
+          console.log('Applied dark theme with floating hearts');
+
+          // Add animation for dark theme
+          const themeAnimation = document.createElement('style');
+          themeAnimation.textContent = `
+            body {
+              animation: darkThemeFadeIn 0.5s ease-in-out;
+            }
+
+            @keyframes darkThemeFadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+          `;
+          document.head.appendChild(themeAnimation);
+        }
+        else if (selectedTheme === 'sleek') {
+          // Load sleek theme CSS
+          const sleekThemeLink = document.createElement('link');
+          sleekThemeLink.rel = 'stylesheet';
+          sleekThemeLink.href = 'css/sleek-theme.css?v=' + (new Date().getTime());
+          document.head.appendChild(sleekThemeLink);
+
+          console.log('Applied sleek professional theme');
+
+          // Add animation for theme
+          const themeAnimation = document.createElement('style');
+          themeAnimation.textContent = `
+            body {
+              animation: sleekThemeFadeIn 0.5s ease-in-out;
+            }
+
+            @keyframes sleekThemeFadeIn {
+              from { opacity: 0; }
+              to { opacity: 1; }
+            }
+          `;
+          document.head.appendChild(themeAnimation);
+        }
+
+        // Clear the auto-inject flag (run only once)
+        localStorage.setItem('datamatch_auto_inject', 'false');
+
+        console.log('Auto-injected component scripts and styles with theme: ' + selectedTheme);
+      }
+    }
+  </script>
+</body>
+</html>

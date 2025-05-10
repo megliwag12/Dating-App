@@ -1,0 +1,109 @@
+{
+  "id": "admin123",
+  "email": "admin@datamatch.com",
+  "password": "password123",
+  "name": "Admin User",
+  "tagline": "DataMatch Administrator",
+  "age": 30,
+  "gender": "prefer-not-to-say",
+  "about": "I manage the DataMatch platform and ensure everything runs smoothly.",
+  "interests": [
+    "technology",
+    "data science",
+    "artificial intelligence"
+  ],
+  "lookingFor": "networking",
+  "createdAt": "2025-05-10T16:30:59.170Z",
+  "profileCompletion": 100,
+  "stats": {
+    "matches": 45,
+    "visitors": 120,
+    "likes": 78
+  },
+  "linkedin": {
+    "url": "https://linkedin.com/in/datamatch-admin",
+    "experience": [
+      {
+        "title": "Platform Administrator",
+        "company": "DataMatch",
+        "location": "San Francisco, CA",
+        "startDate": "2020-01",
+        "endDate": null,
+        "description": "Managing the DataMatch platform and user experience."
+      },
+      {
+        "title": "Data Scientist",
+        "company": "Tech Innovations Inc.",
+        "location": "Seattle, WA",
+        "startDate": "2017-05",
+        "endDate": "2019-12",
+        "description": "Worked on machine learning algorithms and data analysis."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Stanford University",
+        "degree": "Master of Science",
+        "field": "Computer Science",
+        "startDate": "2015",
+        "endDate": "2017"
+      },
+      {
+        "institution": "University of California, Berkeley",
+        "degree": "Bachelor of Science",
+        "field": "Data Science",
+        "startDate": "2011",
+        "endDate": "2015"
+      }
+    ],
+    "skills": [
+      "Machine Learning",
+      "Python",
+      "Data Analysis",
+      "SQL",
+      "Leadership",
+      "Project Management"
+    ]
+  },
+  "searchHistory": [
+    {
+      "searchQuery": "data science professionals",
+      "category": "profession",
+      "timestamp": "2025-05-09T16:30:59.170Z"
+    },
+    {
+      "searchQuery": "machine learning",
+      "category": "interests",
+      "timestamp": "2025-05-08T16:30:59.170Z"
+    },
+    {
+      "searchQuery": "San Francisco",
+      "category": "location",
+      "timestamp": "2025-05-07T16:30:59.170Z"
+    }
+  ],
+  "location": {
+    "lat": 37.7749,
+    "lng": -122.4194,
+    "address": "San Francisco, CA"
+  },
+  "distance": 25,
+  "availability": [
+    {
+      "date": "2023-05-15",
+      "startTime": "09:00",
+      "endTime": "12:00"
+    },
+    {
+      "date": "2023-05-17",
+      "startTime": "14:00",
+      "endTime": "16:00"
+    }
+  ],
+  "settings": {
+    "showLinkedin": true,
+    "showLocation": true,
+    "showAvailability": true,
+    "saveSearchHistory": true
+  }
+}

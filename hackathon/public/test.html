@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .test-box {
+      background-color: #ff4b91;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Test Page</h1>
+  <div class="test-box">
+    <h2>This is a test page</h2>
+    <p>If you can see this, the server is working correctly.</p>
+  </div>
+  
+  <div id="test-element">Click me</div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('Test page loaded');
+      
+      const testElement = document.getElementById('test-element');
+      testElement.addEventListener('click', function() {
+        alert('JavaScript is working!');
+      });
+    });
+  </script>
+</body>
+</html>

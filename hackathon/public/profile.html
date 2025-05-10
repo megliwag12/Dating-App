@@ -3,212 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Profile - DataMatch</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>DataMatch - Your Profile</title>
   <link rel="stylesheet" href="css/modern.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    .profile-container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-      margin: 40px 0;
+  <link rel="stylesheet" href="css/components.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    // Check which theme is active and load it if needed
+    const selectedTheme = localStorage.getItem('datamatch_selected_theme');
+    if (selectedTheme === 'dark') {
+      document.write('<link rel="stylesheet" href="css/dark-theme.css?v=' + new Date().getTime() + '">');
+    } else if (selectedTheme === 'sleek') {
+      document.write('<link rel="stylesheet" href="css/sleek-theme.css?v=' + new Date().getTime() + '">');
     }
-    
-    @media (max-width: 768px) {
-      .profile-container {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    .profile-sidebar {
-      background-color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .profile-main-photo {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-    
-    .profile-sidebar-info {
-      padding: 20px;
-    }
-    
-    .profile-name-age {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    
-    .profile-location {
-      color: var(--gray);
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-    }
-    
-    .profile-location i {
-      margin-right: 5px;
-    }
-    
-    .profile-stats {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-      text-align: center;
-    }
-    
-    .profile-stat {
-      flex: 1;
-    }
-    
-    .stat-value {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--gray);
-    }
-    
-    .profile-content {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      padding: 30px;
-    }
-    
-    .profile-section {
-      margin-bottom: 30px;
-    }
-    
-    .profile-section h2 {
-      color: var(--primary);
-      margin-bottom: 15px;
-      border-bottom: 1px solid var(--light-gray);
-      padding-bottom: 10px;
-    }
-    
-    .profile-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .gallery-image {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    
-    .gallery-image:hover {
-      transform: scale(1.05);
-    }
-    
-    .add-photo-btn {
-      width: 100%;
-      height: 150px;
-      border: 2px dashed var(--light-gray);
-      border-radius: 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    
-    .add-photo-btn:hover {
-      background-color: var(--light-gray);
-    }
-    
-    .add-photo-btn i {
-      font-size: 2rem;
-      color: var(--gray);
-      margin-bottom: 10px;
-    }
-    
-    .interest-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 15px;
-    }
-    
-    .interest-tag {
-      background-color: var(--light-gray);
-      padding: 8px 15px;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .interest-tag i {
-      margin-left: 5px;
-      cursor: pointer;
-      color: var(--gray);
-    }
-    
-    .interest-tag i:hover {
-      color: var(--danger);
-    }
-    
-    .add-interest {
-      background-color: white;
-      border: 1px dashed var(--gray);
-      color: var(--gray);
-    }
-    
-    .preference-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid var(--light-gray);
-    }
-    
-    .preference-label {
-      font-weight: 500;
-    }
-    
-    .preference-value {
-      color: var(--gray);
-    }
-    
-    .edit-btn {
-      display: flex;
-      align-items: center;
-      margin-top: 20px;
-    }
-    
-    .edit-btn i {
-      margin-right: 5px;
-    }
-  </style>
+  </script>
 </head>
 <body>
   <header>
     <div class="container">
-      <nav class="nav">
-        <a href="dashboard.html" class="logo">DataMatch</a>
-        <ul class="nav-links">
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="discover.html">Discover</a></li>
+      <div class="logo">
+        <h1>DataMatch</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
           <li><a href="matches.html">Matches</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="#" id="logoutBtn" class="btn btn-secondary">Logout</a></li>
+          <li><a href="profile.html" class="active">Profile</a></li>
+          <li><a href="messages.html">Messages</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
         </ul>
       </nav>
     </div>
@@ -216,213 +37,952 @@
 
   <main>
     <div class="container">
-      <div class="profile-container">
-        <div class="profile-sidebar">
-          <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Profile Photo" class="profile-main-photo" id="profilePhoto">
-
-          <div class="profile-sidebar-info">
-            <h1 class="profile-name-age"><span id="profileName">Demo User</span>, <span id="profileAge">25</span></h1>
-            <div class="profile-location"><i class="fas fa-map-marker-alt"></i> <span id="profileLocation">San Francisco</span></div>
-            <div id="job-info" style="margin-bottom: 15px; color: var(--gray);">
-              <div id="jobTitle" style="font-weight: 500;">AI Research Scientist</div>
-              <div id="company">TechInnovate</div>
+      <div class="profile-dashboard">
+        <!-- Profile Sidebar -->
+        <aside class="profile-sidebar">
+          <div class="user-profile-card">
+            <div class="profile-avatar">
+              <img src="img/default-avatar.jpg" alt="Profile Picture" id="profile-avatar">
+              <div class="avatar-overlay">
+                <label for="avatar-upload" class="avatar-upload-label">
+                  <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="avatar-upload" accept="image/*" hidden>
+              </div>
             </div>
-
-            <div class="profile-social" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
-              <a href="#" id="linkedinProfile" target="_blank" style="color: #0077b5; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
-              <a href="#" id="twitterProfile" target="_blank" style="color: #1da1f2; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
-              <a href="#" id="instagramProfile" target="_blank" style="color: #e1306c; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
-            </div>
-
+            <h2 id="profile-name">Loading...</h2>
+            <p class="profile-tagline" id="profile-tagline">Your personal tagline</p>
             <div class="profile-stats">
-              <div class="profile-stat">
-                <div class="stat-value">42</div>
-                <div class="stat-label">Views</div>
+              <div class="stat">
+                <span class="stat-value" id="profile-match-count">0</span>
+                <span class="stat-label">Matches</span>
               </div>
-              <div class="profile-stat">
-                <div class="stat-value">8</div>
-                <div class="stat-label">Likes</div>
+              <div class="stat">
+                <span class="stat-value" id="profile-visitors">0</span>
+                <span class="stat-label">Visitors</span>
               </div>
-              <div class="profile-stat">
-                <div class="stat-value">3</div>
-                <div class="stat-label">Matches</div>
+              <div class="stat">
+                <span class="stat-value" id="profile-likes">0</span>
+                <span class="stat-label">Likes</span>
               </div>
             </div>
-
-            <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;"><i class="fas fa-edit"></i> Edit Profile</button>
-            <button class="btn btn-secondary" style="width: 100%;"><i class="fas fa-cog"></i> Settings</button>
+            <div class="profile-completion">
+              <div class="completion-bar">
+                <div class="completion-progress" id="completion-progress"></div>
+              </div>
+              <p class="completion-text">Profile <span id="completion-percentage">0%</span> complete</p>
+            </div>
+            <nav class="profile-nav">
+              <button class="profile-nav-item active" data-target="basic-info">Basic Info</button>
+              <button class="profile-nav-item" data-target="linkedin-data">LinkedIn</button>
+              <button class="profile-nav-item" data-target="deep-data">Deep Data</button>
+              <button class="profile-nav-item" data-target="reviews">Reviews & Verifications</button>
+              <button class="profile-nav-item" data-target="search-history">Search History</button>
+              <button class="profile-nav-item" data-target="chat-history">Messages</button>
+              <button class="profile-nav-item" data-target="calendar">Calendar</button>
+              <button class="profile-nav-item" data-target="location">Location</button>
+            </nav>
           </div>
-        </div>
+        </aside>
 
+        <!-- Profile Content Sections -->
         <div class="profile-content">
-          <div class="profile-section">
-            <h2>About Me</h2>
-            <p id="profileBio">Tech enthusiast and nature lover. Working in AI and looking for meaningful connections.</p>
-            <div id="educationInfo" style="margin-top: 10px; font-style: italic; color: var(--gray);">
-              Ph.D. in Computer Science, Stanford University
-            </div>
-            <button class="edit-btn btn btn-secondary"><i class="fas fa-edit"></i> Edit</button>
-          </div>
+          <!-- Basic Info Section -->
+          <section id="basic-info" class="profile-section active">
+            <h2>Basic Information</h2>
+            <form id="profile-form">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name">
+              </div>
+              <div class="form-group">
+                <label for="tagline">Tagline</label>
+                <input type="text" id="tagline" name="tagline" placeholder="A short description about yourself">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="age">Age</label>
+                  <input type="number" id="age" name="age" min="18" max="120">
+                </div>
+                <div class="form-group">
+                  <label for="gender">Gender</label>
+                  <select id="gender" name="gender">
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="non-binary">Non-binary</option>
+                    <option value="other">Other</option>
+                    <option value="prefer-not-to-say">Prefer not to say</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="about">About Me</label>
+                <textarea id="about" name="about" rows="5" placeholder="Tell potential matches about yourself..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>Interests (select up to 5)</label>
+                <div class="interests-container" id="interests-container">
+                  <!-- Interests will be populated by JavaScript -->
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="looking-for">Looking For</label>
+                <select id="looking-for" name="lookingFor">
+                  <option value="">Select</option>
+                  <option value="friendship">Friendship</option>
+                  <option value="dating">Dating</option>
+                  <option value="long-term">Long-term Relationship</option>
+                  <option value="networking">Professional Networking</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+          </section>
 
-          <div class="profile-section">
-            <h2>Photos</h2>
-            <p>Add photos to increase your chances of getting matches</p>
+          <!-- LinkedIn Data Section -->
+          <section id="linkedin-data" class="profile-section">
+            <h2>LinkedIn Profile Integration</h2>
+            <div class="linkedin-import">
+              <p>Enhance your DataMatch profile by importing your professional information from LinkedIn.</p>
 
-            <div class="profile-gallery" id="photoGallery">
-              <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Gallery Photo" class="gallery-image">
-              <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="Gallery Photo" class="gallery-image">
-              <div class="add-photo-btn">
-                <i class="fas fa-plus"></i>
-                <span>Add Photo</span>
+              <ul class="nav nav-tabs mb-4" id="linkedin-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="linkedin-url-tab" data-bs-toggle="tab" data-bs-target="#linkedin-url-tab-pane" type="button" role="tab" aria-controls="linkedin-url-tab-pane" aria-selected="true">
+                    <i class="fab fa-linkedin"></i> LinkedIn URL
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="manual-entry-tab" data-bs-toggle="tab" data-bs-target="#manual-entry-tab-pane" type="button" role="tab" aria-controls="manual-entry-tab-pane" aria-selected="false">
+                    <i class="fas fa-edit"></i> Manual Entry
+                  </button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="linkedin-tabs-content">
+                <!-- URL Import Tab -->
+                <div class="tab-pane fade show active" id="linkedin-url-tab-pane" role="tabpanel" aria-labelledby="linkedin-url-tab" tabindex="0">
+                  <form id="linkedin-import-form">
+                    <div class="form-group">
+                      <label for="linkedin-url">LinkedIn Profile URL</label>
+                      <input type="url" id="linkedin-url" name="linkedinUrl" placeholder="https://www.linkedin.com/in/yourprofile">
+                    </div>
+                    <button type="submit" class="btn btn-linkedin">
+                      <i class="fab fa-linkedin"></i> Import LinkedIn Data
+                    </button>
+                  </form>
+                </div>
+
+                <!-- Manual Entry Tab -->
+                <div class="tab-pane fade" id="manual-entry-tab-pane" role="tabpanel" aria-labelledby="manual-entry-tab" tabindex="0">
+                  <form id="manual-linkedin-form">
+                    <div class="form-group">
+                      <label for="manual-linkedin-url">LinkedIn URL (Optional)</label>
+                      <input type="url" id="manual-linkedin-url" name="url" placeholder="https://www.linkedin.com/in/yourprofile">
+                    </div>
+
+                    <h4 class="mt-4">Professional Experience</h4>
+                    <div id="experience-container">
+                      <div class="experience-entry">
+                        <div class="form-group">
+                          <label>Job Title</label>
+                          <input type="text" name="title" class="form-control" placeholder="Software Engineer">
+                        </div>
+                        <div class="form-group">
+                          <label>Company</label>
+                          <input type="text" name="company" class="form-control" placeholder="Tech Company">
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" class="form-control" placeholder="San Francisco, CA">
+                          </div>
+                          <div class="form-group">
+                            <label>Start Date (YYYY-MM)</label>
+                            <input type="text" name="startDate" class="form-control" placeholder="2021-01">
+                          </div>
+                          <div class="form-group">
+                            <label>End Date (YYYY-MM or leave blank for current)</label>
+                            <input type="text" name="endDate" class="form-control" placeholder="2023-02">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Description</label>
+                          <textarea name="description" class="form-control" rows="2" placeholder="Brief description of your role and responsibilities"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="button" id="add-experience" class="btn btn-outline btn-sm">
+                      <i class="fas fa-plus"></i> Add Another Experience
+                    </button>
+
+                    <h4 class="mt-4">Education</h4>
+                    <div id="education-container">
+                      <div class="education-entry">
+                        <div class="form-group">
+                          <label>Institution</label>
+                          <input type="text" name="institution" class="form-control" placeholder="University Name">
+                        </div>
+                        <div class="form-group">
+                          <label>Degree</label>
+                          <input type="text" name="degree" class="form-control" placeholder="Bachelor of Science">
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group">
+                            <label>Field of Study</label>
+                            <input type="text" name="field" class="form-control" placeholder="Computer Science">
+                          </div>
+                          <div class="form-group">
+                            <label>Start Year</label>
+                            <input type="text" name="startDate" class="form-control" placeholder="2015">
+                          </div>
+                          <div class="form-group">
+                            <label>End Year</label>
+                            <input type="text" name="endDate" class="form-control" placeholder="2019">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="button" id="add-education" class="btn btn-outline btn-sm">
+                      <i class="fas fa-plus"></i> Add Another Education
+                    </button>
+
+                    <h4 class="mt-4">Skills</h4>
+                    <div class="form-group">
+                      <label>Skills (comma-separated)</label>
+                      <textarea id="skills-input" name="skills" class="form-control" rows="3" placeholder="JavaScript, Python, Leadership, Communication"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-4">
+                      <i class="fas fa-save"></i> Save LinkedIn Data
+                    </button>
+                  </form>
+                </div>
+              </div>
+
+              <div class="info-message mt-4">
+                <i class="fas fa-info-circle"></i>
+                Your professional data is only used to enhance your profile and improve matching. It helps us find more compatible matches based on shared career interests and backgrounds.
               </div>
             </div>
-          </div>
 
-          <div class="profile-section">
-            <h2>Interests</h2>
-            <p>These interests help our AI match you with compatible people</p>
+            <div id="linkedin-data-display" class="linkedin-data-display" style="display: none;">
+              <h3>Your Professional Profile</h3>
 
-            <div class="interest-tags" id="interestTags">
-              <!-- Interest tags will be inserted here -->
-              <div class="interest-tag add-interest">
-                <span>Add Interest</span>
-                <i class="fas fa-plus"></i>
+              <div class="data-card">
+                <h4>Professional Experience</h4>
+                <ul id="linkedin-experience" class="linkedin-list">
+                  <!-- Experience items will be populated by JavaScript -->
+                </ul>
+              </div>
+
+              <div class="data-card">
+                <h4>Education</h4>
+                <ul id="linkedin-education" class="linkedin-list">
+                  <!-- Education items will be populated by JavaScript -->
+                </ul>
+              </div>
+
+              <div class="data-card">
+                <h4>Skills</h4>
+                <div id="linkedin-skills" class="skills-cloud">
+                  <!-- Skills will be populated by JavaScript -->
+                </div>
+              </div>
+
+              <div class="form-group linkedin-visibility">
+                <label for="linkedin-visibility">Show professional data on profile</label>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="linkedin-visible" checked>
+                  <label for="linkedin-visible"></label>
+                </div>
+                <p class="toggle-description">Control whether others can see your professional information</p>
+              </div>
+
+              <button id="edit-linkedin-data" class="btn btn-outline">
+                <i class="fas fa-edit"></i> Edit Professional Data
+              </button>
+            </div>
+          </section>
+
+          <!-- Search History Section -->
+          <section id="search-history" class="profile-section">
+            <h2>Search History & Insights</h2>
+            
+            <div class="search-controls">
+              <form id="search-form" class="search-form">
+                <div class="form-group">
+                  <label for="search-query">Find Matches</label>
+                  <div class="search-input-container">
+                    <input type="text" id="search-query" name="searchQuery" placeholder="Search by interests, profession, or location...">
+                    <select id="search-category" name="searchCategory">
+                      <option value="general">General</option>
+                      <option value="interests">Interests</option>
+                      <option value="profession">Profession</option>
+                      <option value="location">Location</option>
+                    </select>
+                    <button type="submit" class="search-button">
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Search analytics visualization -->
+            <div id="search-analytics-container" class="search-analytics-container">
+              <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <!-- Search history list -->
+            <div id="search-history-container" class="search-history-container">
+              <!-- Will be populated by JavaScript -->
+            </div>
+            
+            <div class="data-privacy-controls">
+              <h3>Privacy Controls</h3>
+              <div class="form-group">
+                <label for="save-search-history">Save search history</label>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="save-search-history" checked>
+                  <label for="save-search-history"></label>
+                </div>
+                <p class="toggle-description">We use your search history to improve match recommendations</p>
+              </div>
+              <div class="form-group">
+                <button class="btn btn-outline" id="clear-search-history">
+                  <i class="fas fa-trash-alt"></i> Clear Search History
+                </button>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div class="profile-section">
-            <h2><i class="far fa-calendar-alt"></i> Availability Calendar</h2>
-            <p>Let potential matches know when you're free for dates</p>
+          <!-- Chat History Section -->
+          <section id="chat-history" class="profile-section">
+            <h2>Messages & Conversations</h2>
+            
+            <div class="messages-layout">
+              <!-- Conversations sidebar -->
+              <div class="conversations-sidebar">
+                <div class="conversations-header">
+                  <h3>Conversations</h3>
+                  <div class="conversations-filter">
+                    <select id="conversations-filter">
+                      <option value="all">All Messages</option>
+                      <option value="unread">Unread</option>
+                      <option value="favorites">Favorites</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <!-- Conversations list -->
+                <div id="conversations-list" class="conversations-list-container">
+                  <!-- Will be populated by JavaScript -->
+                </div>
+              </div>
+              
+              <!-- Chat container -->
+              <div id="chat-container" class="chat-container">
+                <div class="chat-placeholder">
+                  <div class="placeholder-icon">
+                    <i class="far fa-comments"></i>
+                  </div>
+                  <h3>Select a conversation</h3>
+                  <p>Choose a conversation from the list to start chatting</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-            <div class="calendar-container" style="margin-top: 20px; background: var(--lighter-gray); padding: 20px; border-radius: 10px;">
-              <div class="calendar-header" style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="margin: 0; font-size: 1.2rem;">My Available Times</h3>
-                <button class="btn btn-sm btn-secondary"><i class="fas fa-plus"></i> Add Time Slot</button>
+          <!-- Calendar Section -->
+          <section id="calendar" class="profile-section">
+            <h2>Availability Calendar</h2>
+            <p class="section-description">Set your availability for dates and meetings. This helps potential matches know when you're free.</p>
+            
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button id="prev-month" class="calendar-nav-btn">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <h3 id="current-month">May 2023</h3>
+                <button id="next-month" class="calendar-nav-btn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+              
+              <div class="calendar-grid" id="calendar-grid">
+                <!-- Will be populated by JavaScript -->
+              </div>
+            </div>
+            
+            <div class="availability-controls">
+              <h3>Manage Availability</h3>
+              <div class="availability-options">
+                <button class="btn btn-outline" id="add-availability">
+                  <i class="fas fa-plus"></i> Add Availability
+                </button>
+                <button class="btn btn-outline" id="clear-availability">
+                  <i class="fas fa-trash"></i> Clear Selected
+                </button>
+              </div>
+              
+              <div class="form-group">
+                <label for="availability-visibility">Show availability on profile</label>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="availability-visibility" checked>
+                  <label for="availability-visibility"></label>
+                </div>
+                <p class="toggle-description">Allow matches to see when you're available</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Deep Data Section -->
+          <section id="deep-data" class="profile-section">
+            <h2>Deep Data</h2>
+            <p class="section-description">Enhance your matches by sharing deeper data about your habits and preferences. This allows for more meaningful connections based on compatibility in daily life.</p>
+
+            <div class="data-card-grid">
+              <!-- Spotify Listening History -->
+              <div class="deep-data-card">
+                <div class="card-header">
+                  <i class="fab fa-spotify"></i>
+                  <h3>Spotify Listening History</h3>
+                </div>
+                <div class="card-content">
+                  <p>Connect your Spotify to share your music taste for better matches.</p>
+                  <button class="btn btn-spotify" id="connect-spotify">
+                    <i class="fab fa-spotify"></i> Connect Spotify
+                  </button>
+                  <div id="spotify-data" class="connected-data-display" style="display: none;">
+                    <h4>Top Artists</h4>
+                    <ul id="top-artists" class="deep-data-list">
+                      <!-- Will be populated by JavaScript -->
+                    </ul>
+                    <h4>Top Genres</h4>
+                    <div id="top-genres" class="tag-cloud">
+                      <!-- Will be populated by JavaScript -->
+                    </div>
+                    <div class="listening-stats">
+                      <div class="stat">
+                        <span class="value">42</span>
+                        <span class="label">Hours/Week</span>
+                      </div>
+                      <div class="stat">
+                        <span class="value">127</span>
+                        <span class="label">Tracks/Week</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="privacy-control">
+                    <label for="spotify-visibility">Share with matches</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="spotify-visibility" checked>
+                      <label for="spotify-visibility"></label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div class="calendar-days" id="availabilityCalendar">
-                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
-                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Friday</div>
-                  <div class="time-slots">
-                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
-                      19:00 - 22:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
-                    </span>
+              <!-- Purchase History -->
+              <div class="deep-data-card">
+                <div class="card-header">
+                  <i class="fas fa-shopping-cart"></i>
+                  <h3>Purchase History</h3>
+                </div>
+                <div class="card-content">
+                  <p>Connect your shopping accounts to match with people who share your consumer preferences.</p>
+                  <div class="shopping-platforms">
+                    <button class="btn btn-outline btn-sm">
+                      <i class="fab fa-amazon"></i> Amazon
+                    </button>
+                    <button class="btn btn-outline btn-sm">
+                      <i class="fas fa-store"></i> Shopify
+                    </button>
+                    <button class="btn btn-outline btn-sm">
+                      <i class="fab fa-etsy"></i> Etsy
+                    </button>
+                  </div>
+                  <div id="purchase-data" class="connected-data-display" style="display: none;">
+                    <h4>Shopping Personality</h4>
+                    <div class="shopping-traits">
+                      <span class="trait">Practical Buyer</span>
+                      <span class="trait">Health Conscious</span>
+                      <span class="trait">Brand Loyal</span>
+                    </div>
+                    <h4>Top Categories</h4>
+                    <ul id="top-purchases" class="deep-data-list">
+                      <!-- Will be populated by JavaScript -->
+                    </ul>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="privacy-control">
+                    <label for="purchase-visibility">Share with matches</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="purchase-visibility" checked>
+                      <label for="purchase-visibility"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Dietary Patterns -->
+              <div class="deep-data-card">
+                <div class="card-header">
+                  <i class="fas fa-utensils"></i>
+                  <h3>Dietary Patterns</h3>
+                </div>
+                <div class="card-content">
+                  <form id="dietary-form">
+                    <div class="form-group">
+                      <label>Dietary Preference</label>
+                      <select id="dietary-preference" class="form-control">
+                        <option value="">Select preference</option>
+                        <option value="omnivore">Omnivore</option>
+                        <option value="vegetarian">Vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="pescatarian">Pescatarian</option>
+                        <option value="keto">Keto</option>
+                        <option value="paleo">Paleo</option>
+                        <option value="gluten-free">Gluten-free</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Food Restrictions/Allergies</label>
+                      <textarea id="food-restrictions" class="form-control" placeholder="List any food allergies or restrictions..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Favorite Cuisines (select up to 5)</label>
+                      <div class="tag-selector" id="cuisine-selector">
+                        <div class="tag" data-value="italian">Italian</div>
+                        <div class="tag" data-value="japanese">Japanese</div>
+                        <div class="tag" data-value="mexican">Mexican</div>
+                        <div class="tag" data-value="indian">Indian</div>
+                        <div class="tag" data-value="french">French</div>
+                        <div class="tag" data-value="thai">Thai</div>
+                        <div class="tag" data-value="chinese">Chinese</div>
+                        <div class="tag" data-value="mediterranean">Mediterranean</div>
+                        <div class="tag" data-value="american">American</div>
+                        <div class="tag" data-value="korean">Korean</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Dining Preferences</label>
+                      <div class="checkbox-group">
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="dining-out" name="dining-out">
+                          <label for="dining-out">Dining out</label>
+                        </div>
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="cooking" name="cooking">
+                          <label for="cooking">Home cooking</label>
+                        </div>
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="meal-prep" name="meal-prep">
+                          <label for="meal-prep">Meal prepping</label>
+                        </div>
+                        <div class="checkbox-item">
+                          <input type="checkbox" id="food-delivery" name="food-delivery">
+                          <label for="food-delivery">Food delivery</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Dietary Preferences</button>
+                  </form>
+                </div>
+                <div class="card-footer">
+                  <div class="privacy-control">
+                    <label for="dietary-visibility">Share with matches</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="dietary-visibility" checked>
+                      <label for="dietary-visibility"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Text & Emoji Usage -->
+              <div class="deep-data-card">
+                <div class="card-header">
+                  <i class="far fa-smile"></i>
+                  <h3>Text & Emoji Analysis</h3>
+                </div>
+                <div class="card-content">
+                  <p>Analyze your messaging style to match with compatible communicators.</p>
+                  <button class="btn btn-outline" id="analyze-texting">
+                    <i class="fas fa-chart-bar"></i> Analyze My Texting Style
+                  </button>
+                  <div id="texting-data" class="connected-data-display">
+                    <div class="text-stats">
+                      <div class="stat-group">
+                        <div class="stat">
+                          <span class="label">Response Time</span>
+                          <span class="value">4.2 min</span>
+                        </div>
+                        <div class="stat">
+                          <span class="label">Emoji Usage</span>
+                          <span class="value">High</span>
+                        </div>
+                      </div>
+                      <div class="stat-group">
+                        <div class="stat">
+                          <span class="label">Avg Message Length</span>
+                          <span class="value">24 words</span>
+                        </div>
+                        <div class="stat">
+                          <span class="label">GIF Frequency</span>
+                          <span class="value">Medium</span>
+                        </div>
+                      </div>
+                    </div>
+                    <h4>Most Used Emojis</h4>
+                    <div class="emoji-cloud">
+                      <span class="emoji-item">😊</span>
+                      <span class="emoji-item">👍</span>
+                      <span class="emoji-item">❤️</span>
+                      <span class="emoji-item">😂</span>
+                      <span class="emoji-item">🙌</span>
+                    </div>
+                    <div class="communication-style">
+                      <h4>Your Communication Style</h4>
+                      <p>You're an <strong>Enthusiastic Responder</strong> who keeps conversations flowing with quick, emoji-rich messages.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="privacy-control">
+                    <label for="texting-visibility">Share with matches</label>
+                    <div class="toggle-switch">
+                      <input type="checkbox" id="texting-visibility" checked>
+                      <label for="texting-visibility"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Reviews & Verifications Section -->
+          <section id="reviews" class="profile-section">
+            <h2>Reviews & Verifications</h2>
+            <p class="section-description">Real reviews from people who know you. This builds trust with potential matches by providing authentic insights into your character.</p>
+
+            <div class="reviews-header">
+              <h3>Your Dating Reputation</h3>
+              <div class="rating-summary">
+                <div class="rating-stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="rating-number">4.5</div>
+                <div class="rating-count">(7 reviews)</div>
+              </div>
+            </div>
+
+            <div class="review-tabs">
+              <button class="review-tab active" data-target="ex-partners">Ex-Partners</button>
+              <button class="review-tab" data-target="friends">Friends</button>
+              <button class="review-tab" data-target="work">Professional</button>
+              <button class="review-tab" data-target="family">Family</button>
+            </div>
+
+            <div class="review-content">
+              <!-- Ex-Partners Reviews -->
+              <div id="ex-partners-content" class="review-tab-content active">
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Sarah" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Sarah T.</h4>
+                      <div class="relationship-info">Dated for 1.5 years (2021-2022)</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"Great communicator and very thoughtful. Always remembered important dates and was supportive during tough times. We wanted different things in life but I'd highly recommend!"</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Respectful</span>
+                    <span class="tag">Great Listener</span>
+                    <span class="tag">Emotionally Available</span>
                   </div>
                 </div>
 
-                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
-                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Saturday</div>
-                  <div class="time-slots">
-                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
-                      10:00 - 14:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
-                    </span>
-                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
-                      18:00 - 22:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
-                    </span>
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Jessica" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Jessica M.</h4>
+                      <div class="relationship-info">Dated for 8 months (2020)</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"We had a good time together but had different communication styles. Great sense of humor and very kind, but sometimes struggled with work-life balance. Still friends!"</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Funny</span>
+                    <span class="tag">Generous</span>
+                    <span class="tag">Workaholic</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Friends Reviews -->
+              <div id="friends-content" class="review-tab-content">
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Michael" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Michael R.</h4>
+                      <div class="relationship-info">Friends since college (10+ years)</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"One of the most loyal people I know. Always there when you need them and genuinely cares about others. Great at planning events and remembering birthdays!"</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Loyal</span>
+                    <span class="tag">Supportive</span>
+                    <span class="tag">Thoughtful</span>
                   </div>
                 </div>
 
-                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
-                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Sunday</div>
-                  <div class="time-slots">
-                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
-                      11:00 - 18:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
-                    </span>
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/women/85.jpg" alt="Amanda" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Amanda K.</h4>
+                      <div class="relationship-info">Friends for 5 years</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"Always up for an adventure! Extremely reliable and great at keeping in touch. Can sometimes be a bit reserved at first, but opens up once they get comfortable."</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Adventurous</span>
+                    <span class="tag">Reliable</span>
+                    <span class="tag">Introverted</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Professional Reviews -->
+              <div id="work-content" class="review-tab-content">
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Lisa" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Lisa J.</h4>
+                      <div class="relationship-info">Former Manager (2018-2021)</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified LinkedIn
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"Exceptional work ethic and a true team player. Consistently delivered high-quality work and was always willing to help others. Great problem-solver and communicator."</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Hard-working</span>
+                    <span class="tag">Team Player</span>
+                    <span class="tag">Problem Solver</span>
+                  </div>
+                </div>
+
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>David W.</h4>
+                      <div class="relationship-info">Colleague (2019-2022)</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified LinkedIn
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"A pleasure to work with. Organized, detail-oriented, and always willing to lend a hand. Brings a positive attitude to the workplace and handles pressure well."</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Organized</span>
+                    <span class="tag">Positive</span>
+                    <span class="tag">Handles Pressure</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Family Reviews -->
+              <div id="family-content" class="review-tab-content">
+                <div class="review-card">
+                  <div class="reviewer-info">
+                    <img src="https://randomuser.me/api/portraits/women/79.jpg" alt="Emily" class="reviewer-avatar">
+                    <div class="reviewer-meta">
+                      <h4>Emily H.</h4>
+                      <div class="relationship-info">Sister</div>
+                      <div class="review-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="review-verification">
+                      <i class="fas fa-check-circle"></i> Verified
+                    </div>
+                  </div>
+                  <div class="review-content">
+                    <p>"The most caring person I know. Always puts family first and is incredibly thoughtful. Great cook and host - your date will definitely be well-fed!"</p>
+                  </div>
+                  <div class="review-tags">
+                    <span class="tag">Family-oriented</span>
+                    <span class="tag">Caring</span>
+                    <span class="tag">Great Cook</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div style="margin-top: 20px;">
-              <h4 style="margin-bottom: 10px; font-size: 1.1rem;">Preferred Date Activities</h4>
-              <div class="date-activities" id="dateActivities" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Coffee</span>
-                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Dinner</span>
-                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Hiking</span>
-                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Museum</span>
-                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Concert</span>
-                <span class="add-activity" style="background: transparent; border: 1px dashed var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer;">
-                  <i class="fas fa-plus" style="margin-right: 5px;"></i> Add
-                </span>
-              </div>
+            <div class="request-review-section">
+              <h3>Request a Review</h3>
+              <p>Invite someone who knows you well to write a review to strengthen your profile.</p>
+
+              <form id="request-review-form">
+                <div class="form-group">
+                  <label for="reviewer-email">Email Address</label>
+                  <input type="email" id="reviewer-email" class="form-control" placeholder="Enter their email">
+                </div>
+
+                <div class="form-group">
+                  <label for="relationship-type">Relationship</label>
+                  <select id="relationship-type" class="form-control">
+                    <option value="">Select relationship type</option>
+                    <option value="ex-partner">Ex-Partner</option>
+                    <option value="friend">Friend</option>
+                    <option value="colleague">Professional</option>
+                    <option value="family">Family Member</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="review-message">Personal Message (optional)</label>
+                  <textarea id="review-message" class="form-control" placeholder="Add a personal note to your request"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-paper-plane"></i> Send Request
+                </button>
+              </form>
             </div>
-          </div>
+          </section>
 
-          <div class="profile-section">
-            <h2><i class="fas fa-map-marker-alt"></i> Location</h2>
-            <p>Your location helps us find matches in your area</p>
+          <!-- Location Section -->
+          <section id="location" class="profile-section">
+            <h2>Location Settings</h2>
+            <p class="section-description">Set your location to find matches nearby. Your exact location is never shared.</p>
 
-            <div class="location-container" style="position: relative; margin-top: 20px; height: 300px; background: var(--lighter-gray); border-radius: 10px; overflow: hidden;">
-              <!-- Embed a map for demonstration -->
-              <iframe
-                width="100%"
-                height="100%"
-                frameborder="0"
-                scrolling="no"
-                marginheight="0"
-                marginwidth="0"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-122.4194%2C37.7749%2C-122.4194%2C37.7749&amp;layer=mapnik&amp;marker=37.7749%2C-122.4194"
-                style="border: none; border-radius: 10px;">
-              </iframe>
+            <div class="location-options">
+              <div class="form-group">
+                <label for="location-input">Your Location</label>
+                <div class="location-input-container">
+                  <input type="text" id="location-input" placeholder="Enter your city or use current location">
+                  <button class="btn btn-location" id="get-current-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </button>
+                </div>
+              </div>
 
-              <div class="map-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.9); padding: 15px;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <div>
-                    <div style="font-weight: 600;">Current Location:</div>
-                    <div>San Francisco, CA</div>
-                  </div>
-                  <button class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i> Update</button>
+              <div class="form-group">
+                <label for="distance-range">Match Distance (miles)</label>
+                <input type="range" id="distance-range" min="5" max="100" step="5" value="25">
+                <div class="range-values">
+                  <span>5</span>
+                  <span id="distance-value">25</span>
+                  <span>100</span>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="profile-section">
-            <h2>Matching Preferences</h2>
-            <p>Set your preferences to help our AI find better matches</p>
-
-            <div class="preferences-list">
-              <div class="preference-item">
-                <div class="preference-label">Interested in</div>
-                <div class="preference-value" id="genderPreference">Women, Men, Non-binary</div>
-              </div>
-              <div class="preference-item">
-                <div class="preference-label">Age Range</div>
-                <div class="preference-value" id="ageRange">18 - 40 years</div>
-              </div>
-              <div class="preference-item">
-                <div class="preference-label">Maximum Distance</div>
-                <div class="preference-value" id="maxDistance">50 km</div>
+            <div class="map-container">
+              <div id="location-map" class="location-map">
+                <!-- Map will be loaded by JavaScript -->
               </div>
             </div>
 
-            <button class="edit-btn btn btn-secondary"><i class="fas fa-edit"></i> Edit Preferences</button>
-          </div>
-
-          <div class="profile-section">
-            <h2>AI-Powered Match Insights</h2>
-            <p>Based on your profile and activity, our AI has generated these insights</p>
-
-            <div class="match-insights">
-              <div class="insight-item">
-                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
-                Your LinkedIn profile increases your match quality by 45%
+            <div class="form-group">
+              <label for="location-visibility">Share location with matches</label>
+              <div class="toggle-switch">
+                <input type="checkbox" id="location-visibility" checked>
+                <label for="location-visibility"></label>
               </div>
-              <div class="insight-item">
-                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
-                Setting availability on weekends has increased your match rate by 30%
-              </div>
-              <div class="insight-item">
-                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
-                Your professional background is highly compatible with 65% of users in your area
-              </div>
-              <div class="insight-item">
-                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
-                Adding more photos can increase your profile views by 40%
-              </div>
+              <p class="toggle-description">Only your general area is shown, never your exact location</p>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>
@@ -430,317 +990,60 @@
 
   <footer>
     <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2025 DataMatch. All rights reserved.</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>DataMatch</h2>
+          <p>Connecting data-driven professionals</p>
         </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Connect With Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 DataMatch. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="js/auth.js"></script>
-  <script src="js/demo.js"></script>
+  <!-- Our component scripts first -->
+  <script src="js/components/deep-data.js?v=5"></script>
+  <script src="js/components/reviews.js?v=5"></script>
+  <script src="js/components/debug.js?v=5"></script>
+
+  <!-- Then main application scripts -->
+  <script src="js/main.js?v=5"></script>
+  <script src="js/profile.js?v=5"></script>
+  <script src="js/linkedin-integration.js"></script>
+  <script src="js/search-history.js"></script>
+  <script src="js/chat-history.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/location.js"></script>
+
+  <!-- Theme-specific scripts -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Load user data from localStorage
-      const userData = JSON.parse(localStorage.getItem('user') || '{}');
-
-      // Update profile information
-      if (userData && userData.profile) {
-        // Basic profile details
-        document.getElementById('profileName').textContent = userData.profile.name || 'Demo User';
-        document.getElementById('profileAge').textContent = userData.profile.age || '25';
-        document.getElementById('profileLocation').textContent = userData.profile.location || 'San Francisco';
-        document.getElementById('profileBio').textContent = userData.profile.bio || 'Tech enthusiast and nature lover.';
-
-        // Professional details
-        if (document.getElementById('jobTitle')) {
-          document.getElementById('jobTitle').textContent = userData.profile.jobTitle || 'AI Research Scientist';
-        }
-        if (document.getElementById('company')) {
-          document.getElementById('company').textContent = userData.profile.company || 'TechInnovate';
-        }
-        if (document.getElementById('educationInfo')) {
-          document.getElementById('educationInfo').textContent = userData.profile.education || 'Ph.D. in Computer Science, Stanford University';
-        }
-
-        // Social profiles
-        if (userData.profile.socialProfiles) {
-          if (userData.profile.socialProfiles.linkedin) {
-            document.getElementById('linkedinProfile').href = userData.profile.socialProfiles.linkedin;
-          }
-          if (userData.profile.socialProfiles.twitter) {
-            document.getElementById('twitterProfile').href = 'https://twitter.com/' +
-              (userData.profile.socialProfiles.twitter.startsWith('@') ?
-               userData.profile.socialProfiles.twitter.substring(1) :
-               userData.profile.socialProfiles.twitter);
-          }
-          if (userData.profile.socialProfiles.instagram) {
-            document.getElementById('instagramProfile').href = 'https://instagram.com/' +
-              (userData.profile.socialProfiles.instagram.startsWith('@') ?
-               userData.profile.socialProfiles.instagram.substring(1) :
-               userData.profile.socialProfiles.instagram);
-          }
-        }
-
-        // Profile photos
-        if (userData.profile.photos && userData.profile.photos.length > 0) {
-          // Update main profile photo
-          document.getElementById('profilePhoto').src = userData.profile.photos[0].url;
-
-          // Update photo gallery
-          const photoGallery = document.getElementById('photoGallery');
-          if (photoGallery) {
-            // Clear existing photos except the add button
-            const addPhotoBtn = photoGallery.querySelector('.add-photo-btn');
-            photoGallery.innerHTML = '';
-
-            // Add all user photos
-            userData.profile.photos.forEach(photo => {
-              const img = document.createElement('img');
-              img.src = photo.url;
-              img.alt = 'Profile Photo';
-              img.className = 'gallery-image';
-              photoGallery.appendChild(img);
-            });
-
-            // Add the "Add Photo" button back
-            photoGallery.appendChild(addPhotoBtn);
-          }
-        }
-
-        // Update interests
-        const interestTags = document.getElementById('interestTags');
-        if (interestTags) {
-          const addInterestTag = interestTags.querySelector('.add-interest');
-
-          // Clear existing interest tags except the "Add Interest" button
-          interestTags.innerHTML = '';
-
-          // Add user interests
-          if (userData.profile.interests && userData.profile.interests.length > 0) {
-            userData.profile.interests.forEach(interest => {
-              const interestTag = document.createElement('div');
-              interestTag.className = 'interest-tag';
-              interestTag.innerHTML = `
-                <span>${interest}</span>
-                <i class="fas fa-times"></i>
-              `;
-              interestTags.appendChild(interestTag);
-            });
-          }
-
-          // Add the "Add Interest" button back
-          interestTags.appendChild(addInterestTag || document.createElement('div'));
-        }
-
-        // Update calendar availability
-        if (userData.profile.calendar && userData.profile.calendar.availability) {
-          const calendarDiv = document.getElementById('availabilityCalendar');
-          if (calendarDiv) {
-            calendarDiv.innerHTML = '';
-
-            userData.profile.calendar.availability.forEach(dayAvail => {
-              const dayDiv = document.createElement('div');
-              dayDiv.className = 'calendar-day';
-              dayDiv.style = 'margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);';
-
-              // Day name
-              const dayNameDiv = document.createElement('div');
-              dayNameDiv.className = 'day-name';
-              dayNameDiv.style = 'font-weight: 600; margin-bottom: 8px; color: var(--primary);';
-              dayNameDiv.textContent = dayAvail.day;
-              dayDiv.appendChild(dayNameDiv);
-
-              // Time slots
-              const timeSlotsDiv = document.createElement('div');
-              timeSlotsDiv.className = 'time-slots';
-
-              dayAvail.timeSlots.forEach(slot => {
-                const timeSlotSpan = document.createElement('span');
-                timeSlotSpan.className = 'time-slot';
-                timeSlotSpan.style = 'display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);';
-                timeSlotSpan.innerHTML = `${slot.startTime} - ${slot.endTime} <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>`;
-                timeSlotsDiv.appendChild(timeSlotSpan);
-              });
-
-              dayDiv.appendChild(timeSlotsDiv);
-              calendarDiv.appendChild(dayDiv);
-            });
-          }
-
-          // Update preferred date activities
-          const activitiesDiv = document.getElementById('dateActivities');
-          if (activitiesDiv && userData.profile.calendar.preferredDateActivities) {
-            // Keep the "Add" button
-            const addActivityBtn = activitiesDiv.querySelector('.add-activity');
-            activitiesDiv.innerHTML = '';
-
-            // Add all activities
-            userData.profile.calendar.preferredDateActivities.forEach(activity => {
-              const activityTag = document.createElement('span');
-              activityTag.className = 'activity-tag';
-              activityTag.style = 'background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;';
-              activityTag.textContent = activity;
-              activitiesDiv.appendChild(activityTag);
-            });
-
-            // Add the "Add" button back
-            if (addActivityBtn) {
-              activitiesDiv.appendChild(addActivityBtn);
-            } else {
-              const newAddBtn = document.createElement('span');
-              newAddBtn.className = 'add-activity';
-              newAddBtn.style = 'background: transparent; border: 1px dashed var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer;';
-              newAddBtn.innerHTML = '<i class="fas fa-plus" style="margin-right: 5px;"></i> Add';
-              activitiesDiv.appendChild(newAddBtn);
-            }
-          }
-        }
-
-        // Update map if coordinates are available
-        if (userData.profile.coordinates) {
-          const iframe = document.querySelector('.location-container iframe');
-          if (iframe) {
-            const lat = userData.profile.coordinates.latitude;
-            const lng = userData.profile.coordinates.longitude;
-            iframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng}%2C${lat}%2C${lng}%2C${lat}&amp;layer=mapnik&amp;marker=${lat}%2C${lng}`;
-          }
-        }
-
-        // Update preferences
-        if (userData.profile.preferences) {
-          // Gender preference
-          const genderPref = userData.profile.preferences.genderPreference || [];
-          if (document.getElementById('genderPreference')) {
-            document.getElementById('genderPreference').textContent =
-              genderPref.length > 0
-                ? genderPref.map(g => g.charAt(0).toUpperCase() + g.slice(1)).join(', ')
-                : 'Everyone';
-          }
-
-          // Age range
-          const minAge = userData.profile.preferences.minAge || 18;
-          const maxAge = userData.profile.preferences.maxAge || 40;
-          if (document.getElementById('ageRange')) {
-            document.getElementById('ageRange').textContent = `${minAge} - ${maxAge} years`;
-          }
-
-          // Distance
-          const maxDistance = userData.profile.preferences.maxDistance || 50;
-          if (document.getElementById('maxDistance')) {
-            document.getElementById('maxDistance').textContent = `${maxDistance} km`;
-          }
-        }
-      }
-
-      // Event handlers
-
-      // Add interest button
-      const addInterestBtn = document.querySelector('.add-interest');
-      if (addInterestBtn) {
-        addInterestBtn.addEventListener('click', function() {
-          const interest = prompt('Enter a new interest:');
-          if (interest && interest.trim()) {
-            const interestTag = document.createElement('div');
-            interestTag.className = 'interest-tag';
-            interestTag.innerHTML = `
-              <span>${interest}</span>
-              <i class="fas fa-times"></i>
-            `;
-
-            const interestTags = document.getElementById('interestTags');
-            interestTags.insertBefore(interestTag, addInterestBtn);
-
-            // Add event listener to remove button
-            const removeBtn = interestTag.querySelector('i');
-            removeBtn.addEventListener('click', function() {
-              interestTag.remove();
-            });
-          }
-        });
-      }
-
-      // Add time slot button
-      const addTimeSlotBtn = document.querySelector('.calendar-header button');
-      if (addTimeSlotBtn) {
-        addTimeSlotBtn.addEventListener('click', function() {
-          const day = prompt('Enter day of week (e.g., Monday):');
-          const startTime = prompt('Enter start time (e.g., 18:00):');
-          const endTime = prompt('Enter end time (e.g., 22:00):');
-
-          if (day && startTime && endTime) {
-            // Check if day already exists
-            let dayDiv = null;
-            const days = document.querySelectorAll('.calendar-day');
-            for (let i = 0; i < days.length; i++) {
-              if (days[i].querySelector('.day-name').textContent.toLowerCase() === day.toLowerCase()) {
-                dayDiv = days[i];
-                break;
-              }
-            }
-
-            // Create new day if it doesn't exist
-            if (!dayDiv) {
-              dayDiv = document.createElement('div');
-              dayDiv.className = 'calendar-day';
-              dayDiv.style = 'margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);';
-
-              const dayNameDiv = document.createElement('div');
-              dayNameDiv.className = 'day-name';
-              dayNameDiv.style = 'font-weight: 600; margin-bottom: 8px; color: var(--primary);';
-              dayNameDiv.textContent = day;
-              dayDiv.appendChild(dayNameDiv);
-
-              const timeSlotsDiv = document.createElement('div');
-              timeSlotsDiv.className = 'time-slots';
-              dayDiv.appendChild(timeSlotsDiv);
-
-              document.getElementById('availabilityCalendar').appendChild(dayDiv);
-            }
-
-            // Add time slot
-            const timeSlotSpan = document.createElement('span');
-            timeSlotSpan.className = 'time-slot';
-            timeSlotSpan.style = 'display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);';
-            timeSlotSpan.innerHTML = `${startTime} - ${endTime} <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>`;
-
-            dayDiv.querySelector('.time-slots').appendChild(timeSlotSpan);
-
-            // Add event listener to remove button
-            const removeBtn = timeSlotSpan.querySelector('i');
-            removeBtn.addEventListener('click', function() {
-              timeSlotSpan.remove();
-
-              // If this was the last time slot for the day, remove the day
-              if (dayDiv.querySelector('.time-slots').children.length === 0) {
-                dayDiv.remove();
-              }
-            });
-          }
-        });
-      }
-
-      // Add activity button
-      const addActivityBtn = document.querySelector('.add-activity');
-      if (addActivityBtn) {
-        addActivityBtn.addEventListener('click', function() {
-          const activity = prompt('Enter a preferred date activity:');
-          if (activity && activity.trim()) {
-            const activityTag = document.createElement('span');
-            activityTag.className = 'activity-tag';
-            activityTag.style = 'background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;';
-            activityTag.textContent = activity;
-
-            document.getElementById('dateActivities').insertBefore(activityTag, addActivityBtn);
-          }
-        });
-      }
-    });
+    // Load floating hearts for dark theme
+    if (localStorage.getItem('datamatch_selected_theme') === 'dark') {
+      document.write('<script src="js/floating-hearts.js?v=' + new Date().getTime() + '"><\/script>');
+    }
   </script>
+
+  <!-- Include a basic map library -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </body>
 </html>

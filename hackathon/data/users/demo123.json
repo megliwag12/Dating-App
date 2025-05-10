@@ -1,0 +1,100 @@
+{
+  "id": "demo123",
+  "email": "demo@datamatch.com",
+  "password": "demo123",
+  "name": "Demo User",
+  "tagline": "Exploring DataMatch",
+  "age": 28,
+  "gender": "female",
+  "about": "I'm curious about technology and connecting with professionals in the data science field.",
+  "interests": [
+    "technology",
+    "machine learning",
+    "startups",
+    "big data",
+    "photography",
+    "hiking"
+  ],
+  "lookingFor": "long-term",
+  "createdAt": "2025-05-10T16:30:59.170Z",
+  "profileCompletion": 90,
+  "stats": {
+    "matches": 12,
+    "visitors": 45,
+    "likes": 23
+  },
+  "linkedin": {
+    "url": "https://linkedin.com/in/datamatch-demo",
+    "experience": [
+      {
+        "title": "Data Analyst",
+        "company": "Tech Startup",
+        "location": "Austin, TX",
+        "startDate": "2021-03",
+        "endDate": null,
+        "description": "Analyzing user behavior and creating insights for product development."
+      },
+      {
+        "title": "Marketing Analyst",
+        "company": "Digital Agency",
+        "location": "Chicago, IL",
+        "startDate": "2019-06",
+        "endDate": "2021-02",
+        "description": "Used data-driven approaches to optimize marketing campaigns."
+      }
+    ],
+    "education": [
+      {
+        "institution": "University of Texas",
+        "degree": "Bachelor of Business Administration",
+        "field": "Marketing Analytics",
+        "startDate": "2015",
+        "endDate": "2019"
+      }
+    ],
+    "skills": [
+      "Data Analysis",
+      "SQL",
+      "R",
+      "Marketing",
+      "Tableau",
+      "Communication"
+    ]
+  },
+  "searchHistory": [
+    {
+      "searchQuery": "tech startups",
+      "category": "interests",
+      "timestamp": "2025-05-10T04:30:59.170Z"
+    },
+    {
+      "searchQuery": "data analyst",
+      "category": "profession",
+      "timestamp": "2025-05-09T04:30:59.170Z"
+    }
+  ],
+  "location": {
+    "lat": 30.2672,
+    "lng": -97.7431,
+    "address": "Austin, TX",
+    "type": "manual",
+    "lastUpdated": "2025-05-10T19:20:59.598Z"
+  },
+  "distance": 5,
+  "availability": [
+    {
+      "date": "2023-05-20",
+      "startTime": "13:00",
+      "endTime": "15:00"
+    }
+  ],
+  "settings": {
+    "showLinkedin": true,
+    "showLocation": true,
+    "showAvailability": true,
+    "saveSearchHistory": true
+  },
+  "locationPreferences": {
+    "maxDistance": 5
+  }
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataMatch - Direct Profile</title>
+  <link rel="stylesheet" href="css/modern.css">
+  <link rel="stylesheet" href="css/components.css?v=4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      padding-top: 20px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .controls {
+      margin-bottom: 30px;
+      background-color: #f8f8f8;
+      padding: 15px;
+      border-radius: 10px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      margin-right: 10px;
+      transition: all 0.2s;
+    }
+    .btn:hover {
+      background-color: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DataMatch - Direct Profile Test</h1>
+    <p>This page directly loads sections from the profile page to verify component functionality.</p>
+    
+    <div class="controls">
+      <button id="show-deep-data" class="btn">Show Deep Data</button>
+      <button id="show-reviews" class="btn">Show Reviews</button>
+      <button id="reset-view" class="btn">Reset View</button>
+    </div>
+    
+    <div id="content-area">
+      <div id="deep-data-section" style="display: none;">
+        <section id="deep-data" class="profile-section active">
+          <h2>Deep Data</h2>
+          <p class="section-description">Enhance your matches by sharing deeper data about your habits and preferences. This allows for more meaningful connections based on compatibility in daily life.</p>
+          
+          <div class="data-card-grid">
+            <!-- Spotify Listening History -->
+            <div class="deep-data-card">
+              <div class="data-card-header">
+                <h3><i class="fab fa-spotify"></i> Spotify Listening History</h3>
+              </div>
+              <div class="data-card-content">
+                <p>Connect your Spotify account to share your music taste and find matches with similar music preferences.</p>
+                <button class="btn btn-spotify" id="connect-spotify">
+                  <i class="fab fa-spotify"></i> Connect with Spotify
+                </button>
+                <div id="spotify-data" class="connected-data-display" style="display: none;"></div>
+              </div>
+            </div>
+            
+            <!-- Purchase History -->
+            <div class="deep-data-card">
+              <div class="data-card-header">
+                <h3><i class="fas fa-shopping-cart"></i> Purchase History</h3>
+              </div>
+              <div class="data-card-content">
+                <p>Share your purchase history to find matches with similar tastes and spending habits.</p>
+                <input type="file" id="purchase-file" hidden>
+                <button class="btn" id="purchase-upload">Upload Purchase History</button>
+                <div id="purchase-data" class="connected-data-display" style="display: none;"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      
+      <div id="reviews-section" style="display: none;">
+        <section id="reviews" class="profile-section active">
+          <h2>Reviews & Verifications</h2>
+          <p class="section-description">Real reviews from people who know you. This builds trust with potential matches by providing authentic insights into your character.</p>
+          
+          <div class="review-tabs">
+            <button class="review-tab active" data-target="ex-partners">Ex-Partners</button>
+            <button class="review-tab" data-target="friends">Friends</button>
+            <button class="review-tab" data-target="work">Professional</button>
+            <button class="review-tab" data-target="family">Family</button>
+          </div>
+          
+          <div class="review-content-container">
+            <div id="ex-partners-content" class="review-tab-content active">
+              <p>Ex-partner reviews will appear here.</p>
+            </div>
+            
+            <div id="friends-content" class="review-tab-content">
+              <p>Friend reviews will appear here.</p>
+            </div>
+            
+            <div id="work-content" class="review-tab-content">
+              <p>Professional reviews will appear here.</p>
+            </div>
+            
+            <div id="family-content" class="review-tab-content">
+              <p>Family reviews will appear here.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core scripts -->
+  <script src="js/components/deep-data.js?v=4"></script>
+  <script src="js/components/reviews.js?v=4"></script>
+  <script src="js/components/debug.js?v=4"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Control buttons
+      document.getElementById('show-deep-data').addEventListener('click', function() {
+        document.getElementById('deep-data-section').style.display = 'block';
+        document.getElementById('reviews-section').style.display = 'none';
+      });
+      
+      document.getElementById('show-reviews').addEventListener('click', function() {
+        document.getElementById('deep-data-section').style.display = 'none';
+        document.getElementById('reviews-section').style.display = 'block';
+      });
+      
+      document.getElementById('reset-view').addEventListener('click', function() {
+        document.getElementById('deep-data-section').style.display = 'none';
+        document.getElementById('reviews-section').style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>

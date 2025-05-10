@@ -1,0 +1,367 @@
+/* DataMatch - Dark Theme CSS */
+
+:root {
+  /* Main color palette - Dating app dark theme */
+  --primary: #ff4d8d;
+  --primary-dark: #e6006e;
+  --primary-light: #ff7eb0;
+  --secondary: #8a2be2;
+  --secondary-dark: #6a1bb2;
+  --secondary-light: #a359ff;
+  --accent: #00ccb3;
+  --accent-dark: #00a38f;
+  --accent-light: #54fadf;
+  
+  /* Dark mode colors */
+  --bg-color: #121212;
+  --card-color: #1e1e1e;
+  --card-color-hover: #252525;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-color: #333333;
+  
+  /* Utility colors */
+  --success: #16d876;
+  --warning: #ffbc34;
+  --error: #ff5e5e;
+  --info: #5e97ff;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #ff4d8d, #9f2be2);
+  --gradient-secondary: linear-gradient(135deg, #8a2be2, #00ccb3);
+  
+  /* Shadows for dark theme */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 5px 15px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Apply dark theme */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+/* Header styling */
+header {
+  background-color: rgba(30, 30, 30, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Navigation */
+nav ul li a {
+  color: var(--text-secondary);
+}
+
+nav ul li a:hover {
+  color: var(--primary);
+}
+
+nav ul li a.active {
+  color: var(--primary);
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+}
+
+.user-profile-card {
+  background-color: var(--card-color);
+}
+
+.profile-nav-item {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.profile-nav-item:hover {
+  background-color: rgba(255, 77, 141, 0.1);
+}
+
+.profile-nav-item.active {
+  background: var(--gradient-primary);
+  color: white;
+  border-color: transparent;
+}
+
+/* Cards and sections */
+.profile-section {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+}
+
+.card, .match-card, .message-card {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+}
+
+.card:hover, .match-card:hover, .message-card:hover {
+  background-color: var(--card-color-hover);
+  border-color: var(--primary);
+}
+
+/* Form elements */
+input, select, textarea {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(255, 77, 141, 0.2);
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Buttons */
+.btn {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #ff3a7d, #8f1ad2);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--gradient-secondary);
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #7a1bd2, #00bcA3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 77, 141, 0.1);
+}
+
+/* Deep data cards */
+.deep-data-card {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+}
+
+.deep-data-card:hover {
+  background-color: var(--card-color-hover);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
+}
+
+.data-card-header {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+/* Review system */
+.review-tabs {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.review-tab {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.review-tab:hover {
+  background-color: rgba(255, 77, 141, 0.1);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.review-tab.active {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+}
+
+.review-card {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+}
+
+.review-card:hover {
+  background-color: var(--card-color-hover);
+  transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+  background-color: rgba(30, 30, 30, 0.9);
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* Animation for background */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating hearts animation (like in the Twitter post) */
+.floating-hearts-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.floating-heart {
+  position: absolute;
+  background-color: transparent;
+  color: var(--primary);
+  font-size: 20px;
+  opacity: 0;
+  pointer-events: none;
+  animation: floatHeart 10s linear infinite;
+}
+
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(90vh) scale(0.8);
+    opacity: 0.3;
+  }
+  60% {
+    transform: translateY(40vh) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-10vh) scale(0.5) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Glowing effects */
+.glow-effect {
+  box-shadow: 0 0 15px rgba(255, 77, 141, 0.5);
+}
+
+/* Match percentage badges */
+.match-percentage {
+  background: var(--gradient-primary);
+}
+
+/* Like button animation */
+.like-button {
+  color: var(--text-muted);
+}
+
+.like-button:hover, .like-button.active {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+/* Message bubbles */
+.message-bubble.sent {
+  background: var(--gradient-primary);
+  color: white;
+}
+
+.message-bubble.received {
+  background-color: var(--card-color-hover);
+  color: var(--text-primary);
+}
+
+/* Profile completion bar */
+.completion-bar {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.completion-progress {
+  background: var(--gradient-primary);
+}
+
+/* Animations for elements */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animated-element {
+  animation: fadeIn 0.5s ease, slideUp 0.5s ease;
+}
+
+/* Dark theme for debug button */
+#debug-btn {
+  background-color: var(--secondary);
+}
+
+#debug-btn:hover {
+  background-color: var(--secondary-dark);
+}
+
+/* Dark theme for debug info modal */
+#debug-info-modal {
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Tooltip with dark theme */
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}

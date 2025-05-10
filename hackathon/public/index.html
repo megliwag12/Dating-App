@@ -3,173 +3,932 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DateMatch - Find Your Perfect Match</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>DataMatch - Smart Dating for Modern Singles</title>
   <link rel="stylesheet" href="css/modern.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .hero {
+      background: linear-gradient(135deg, #ff4b91 0%, #8a2be2 100%);
+      color: white;
+      padding: 6rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('https://images.unsplash.com/photo-1516914589923-f105f1075eb3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255, 75, 145, 0.2) 0%, rgba(138, 43, 226, 0.4) 100%);
+      z-index: 1;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 0 auto 2.5rem;
+      opacity: 0.95;
+      line-height: 1.6;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .feature-section {
+      padding: 4rem 0;
+      background-color: var(--bg-color);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background-color: var(--card-color);
+      border-radius: var(--card-border-radius);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-normal);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(255, 75, 145, 0.15);
+      border-color: rgba(255, 75, 145, 0.2);
+    }
+
+    .feature-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      animation: heartbeat 3s infinite;
+      animation-delay: calc(var(--animation-order) * 0.5s);
+    }
+
+    .feature-card:nth-child(1) .feature-icon { --animation-order: 1; }
+    .feature-card:nth-child(2) .feature-icon { --animation-order: 2; }
+    .feature-card:nth-child(3) .feature-icon { --animation-order: 3; }
+    .feature-card:nth-child(4) .feature-icon { --animation-order: 4; }
+    .feature-card:nth-child(5) .feature-icon { --animation-order: 5; }
+    .feature-card:nth-child(6) .feature-icon { --animation-order: 6; }
+    
+    .feature-card h3 {
+      margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+      color: var(--text-secondary);
+    }
+    
+    .cta-section {
+      background-color: var(--primary-light);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    
+    .cta-section h2 {
+      margin-bottom: 1.5rem;
+    }
+    
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn-white {
+      background-color: white;
+      color: var(--primary);
+    }
+    
+    .btn-white:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .login-form-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition-normal), visibility var(--transition-normal);
+    }
+    
+    .login-form-container.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .login-form {
+      background-color: var(--card-color);
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    
+    .form-tabs {
+      display: flex;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .form-tab {
+      flex: 1;
+      padding: 0.75rem;
+      text-align: center;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+    
+    .form-tab.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      font-weight: 500;
+    }
+    
+    .form-content {
+      display: none;
+    }
+    
+    .form-content.active {
+      display: block;
+    }
+    
+    .demo-credentials {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: rgba(79, 70, 229, 0.1);
+      border-radius: var(--input-border-radius);
+    }
+    
+    .demo-credentials h4 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .credential-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.25rem;
+    }
+    
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    
+    .success-stories {
+      padding: 4rem 0;
+    }
+    
+    .story-card {
+      background-color: var(--card-color);
+      border-radius: var(--card-border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      margin-top: 2rem;
+    }
+    
+    .couple-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.5rem;
+    }
+    
+    .story-quote {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    
+    .couple-names {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .how-it-works {
+      padding: 4rem 0;
+      background-color: rgba(79, 70, 229, 0.05);
+    }
+    
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .step {
+      text-align: center;
+    }
+    
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-weight: 600;
+    }
+    
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    
+    .step-desc {
+      color: var(--text-secondary);
+    }
+    
+    @media (max-width: 768px) {
+      .hero {
+        padding: 3rem 0;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <nav class="nav">
-        <a href="index.html" class="logo">DateMatch</a>
-        <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="login.html" class="btn btn-secondary">Login</a></li>
-          <li><a href="register.html" class="btn btn-primary">Sign Up</a></li>
+      <div class="logo">
+        <h1>DataMatch</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#stories">Success Stories</a></li>
+          <li><a href="#" id="login-btn">Login</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
   <main>
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="hero-content">
-          <h1>AI-Powered <span style="background: linear-gradient(90deg, #11cdef, #2dce89); -webkit-background-clip: text; background-clip: text; color: transparent;">Dating</span> Revolution</h1>
-          <p>Our sophisticated AI algorithm analyzes 100+ compatibility dimensions to find your perfect match based on deeper connections, not just appearances.</p>
-          <div class="hero-buttons" style="display: flex; gap: 1rem; margin-bottom: 2rem;">
-            <a href="register.html" class="btn btn-primary btn-lg btn-icon"><i class="fas fa-heart"></i> Find Your Match</a>
-            <a href="about.html" class="btn btn-secondary btn-lg btn-icon"><i class="fas fa-brain"></i> How AI Works</a>
-          </div>
-          <div class="hero-stats" style="display: flex; gap: 2rem; background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-            <div class="hero-stat" style="text-align: center;">
-              <span style="display: block; font-size: 2rem; font-weight: 700;">95%</span>
-              <span style="font-size: 0.9rem; opacity: 0.8;">Match Accuracy</span>
-            </div>
-            <div class="hero-stat" style="text-align: center;">
-              <span style="display: block; font-size: 2rem; font-weight: 700;">85%</span>
-              <span style="font-size: 0.9rem; opacity: 0.8;">Success Rate</span>
-            </div>
-            <div class="hero-stat" style="text-align: center;">
-              <span style="display: block; font-size: 2rem; font-weight: 700;">10M+</span>
-              <span style="font-size: 0.9rem; opacity: 0.8;">Happy Users</span>
-            </div>
-          </div>
-        </div>
-        <div class="hero-image">
-          <img src="https://img.freepik.com/free-vector/mobile-dating-app-concept-illustration_114360-3437.jpg" alt="Find your match">
+        <h1>Find Your Perfect Match with Data</h1>
+        <p>DataMatch uses your personal data to create meaningful connections. Share your interests, experiences, and preferences to meet people who truly match with you.</p>
+        <div class="button-group">
+          <button class="btn btn-accent" id="get-started-btn">Get Started</button>
+          <button class="btn btn-outline btn-white" id="explore-btn">Learn More</button>
         </div>
       </div>
     </section>
 
-    <section class="features">
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
       <div class="container">
-        <h2>How It Works</h2>
-        <div class="feature-cards">
-          <div class="feature-card">
-            <i class="fas fa-user-edit"></i>
-            <h3>Create Your Profile</h3>
-            <p>Build a detailed profile that showcases your personality, interests, and what you're looking for.</p>
+        <h2 class="section-title">How DataMatch Works</h2>
+        <p class="section-description">Our data-driven approach means better compatibility and more meaningful connections</p>
+        
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Create Your Profile</h3>
+            <p class="step-desc">Build a comprehensive profile with your interests, photos, and preferences.</p>
           </div>
-          <div class="feature-card">
-            <i class="fas fa-chart-bar"></i>
-            <h3>Get Matched</h3>
-            <p>Our algorithm analyzes your preferences and finds compatible matches tailored specifically to you.</p>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Connect Your Data</h3>
+            <p class="step-desc">Link your LinkedIn profile, location, and availability to enhance your matching.</p>
           </div>
-          <div class="feature-card">
-            <i class="fas fa-comments"></i>
-            <h3>Connect & Chat</h3>
-            <p>When you both like each other, it's a match! Start a conversation and get to know each other.</p>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Get Smart Matches</h3>
+            <p class="step-desc">Our algorithm finds people with compatible interests, schedules, and backgrounds.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Connect & Meet</h3>
+            <p class="step-desc">Chat with your matches and schedule dates based on mutual availability.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="testimonials">
+    <!-- Features Section -->
+    <section class="feature-section" id="features">
       <div class="container">
-        <h2>Success Stories</h2>
-        <div class="testimonial-cards">
-          <div class="testimonial-card">
-            <div class="testimonial-image">
-              <img src="images/testimonial-1.jpg" alt="Sarah and Mike">
+        <h2 class="section-title">Why Choose DataMatch</h2>
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-user-tie"></i>
             </div>
-            <div class="testimonial-content">
-              <p>"We matched on DateMatch three years ago and are now happily married! The compatibility algorithm really works!"</p>
-              <h4>Sarah & Mike</h4>
-            </div>
+            <h3>LinkedIn Integration</h3>
+            <p>Connect your LinkedIn to showcase your professional side and match with people who share your career interests.</p>
           </div>
-          <div class="testimonial-card">
-            <div class="testimonial-image">
-              <img src="images/testimonial-2.jpg" alt="James and Lisa">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-history"></i>
             </div>
-            <div class="testimonial-content">
-              <p>"I was skeptical at first, but DateMatch introduced me to someone I would have never met otherwise. We've been together for a year now!"</p>
-              <h4>James & Lisa</h4>
+            <h3>Smart Search Patterns</h3>
+            <p>We learn from your search habits to deliver better matches based on the qualities you most frequently look for.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-comments"></i>
             </div>
+            <h3>Meaningful Conversations</h3>
+            <p>Our chat system lets you get to know your matches before meeting, with conversation starters based on mutual interests.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3>Availability Calendar</h3>
+            <p>Set your free time in the calendar and let our system suggest dates when both you and your match are available.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Location Matching</h3>
+            <p>Find people nearby or set your dating radius to match with people in areas you frequently visit or plan to travel to.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Compatibility Analytics</h3>
+            <p>View detailed compatibility scores and understand exactly why we matched you with someone.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="cta">
+    <!-- Success Stories Section -->
+    <section class="success-stories" id="stories">
       <div class="container">
-        <h2>Ready to Find Your Match?</h2>
-        <p>Join thousands of singles who have found meaningful connections on DateMatch.</p>
-        <a href="register.html" class="btn btn-primary">Sign Up Now</a>
+        <h2 class="section-title">Success Stories</h2>
+        <p class="section-description">Real couples who found each other through DataMatch</p>
+        
+        <div class="features">
+          <div class="story-card">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah" class="couple-img">
+            <p class="story-quote">"I was tired of dating apps that only focused on looks. DataMatch connected me with someone who shares my passion for hiking and photography. We've been together for 8 months now!"</p>
+            <p class="couple-names">Sarah & Michael</p>
+          </div>
+          <div class="story-card">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David" class="couple-img">
+            <p class="story-quote">"As a busy professional, I never had time to date. The calendar matching feature helped me find someone with a similar schedule. We've been dating for 6 months and it's going great."</p>
+            <p class="couple-names">David & Emma</p>
+          </div>
+          <div class="story-card">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jennifer" class="couple-img">
+            <p class="story-quote">"After linking my LinkedIn profile, I matched with someone in my industry. We bonded over shared career interests first, which evolved into something more. Now we're engaged!"</p>
+            <p class="couple-names">Jennifer & Robert</p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+      <div class="container">
+        <div class="cta-hearts">
+          <span class="floating-heart">❤️</span>
+          <span class="floating-heart">💖</span>
+          <span class="floating-heart">💗</span>
+          <span class="floating-heart">💓</span>
+          <span class="floating-heart">💘</span>
+        </div>
+        <h2>Ready to find your perfect match?</h2>
+        <p>Join DataMatch today and discover meaningful connections based on what really matters.</p>
+        <div class="button-group">
+          <button class="btn btn-accent pulse-button" id="sign-up-btn">
+            <i class="fas fa-heart"></i> Sign Up Free
+          </button>
+          <button class="btn btn-white glow-button" id="try-demo-btn">
+            <i class="fas fa-user"></i> Try Demo
+          </button>
+        </div>
+        <div class="users-counter">
+          <span class="counter-number">5,782</span> singles already found their match!
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .cta-section {
+        background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-light) 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-hearts {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .floating-heart {
+        position: absolute;
+        font-size: 1.5rem;
+        opacity: 0;
+        animation: float-up 10s linear infinite;
+      }
+
+      .floating-heart:nth-child(1) {
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-heart:nth-child(2) {
+        left: 30%;
+        animation-delay: 2s;
+      }
+
+      .floating-heart:nth-child(3) {
+        left: 50%;
+        animation-delay: 5s;
+      }
+
+      .floating-heart:nth-child(4) {
+        left: 70%;
+        animation-delay: 7s;
+      }
+
+      .floating-heart:nth-child(5) {
+        left: 90%;
+        animation-delay: 9s;
+      }
+
+      @keyframes float-up {
+        0% {
+          bottom: -20px;
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        10% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        90% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          bottom: calc(100% + 20px);
+          opacity: 0;
+          transform: scale(0.5);
+        }
+      }
+
+      .pulse-button {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 75, 145, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(255, 75, 145, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 75, 145, 0);
+        }
+      }
+
+      .glow-button {
+        animation: glow 4s infinite alternate;
+      }
+
+      @keyframes glow {
+        0% {
+          box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+      }
+
+      .users-counter {
+        margin-top: 2rem;
+        font-size: 1.1rem;
+        color: white;
+        opacity: 0.9;
+      }
+
+      .counter-number {
+        font-weight: 700;
+        background: white;
+        color: var(--primary);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        margin-right: 0.5rem;
+      }
+    </style>
   </main>
 
   <footer>
     <div class="container">
       <div class="footer-content">
         <div class="footer-logo">
-          <a href="index.html" class="logo">Data<span style="font-weight:800; color:#11cdef;">Match</span></a>
-          <p>Experience AI-powered dating that creates meaningful connections based on deep compatibility analysis.</p>
+          <h2>DataMatch</h2>
+          <p>Smart dating for modern singles</p>
         </div>
         <div class="footer-links">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="login.html">Login</a></li>
-            <li><a href="register.html">Sign Up</a></li>
-          </ul>
-        </div>
-        <div class="footer-links">
-          <h3>Legal</h3>
-          <ul>
-            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">About Us</a></li>
             <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Dating Safety</a></li>
           </ul>
         </div>
-        <div class="footer-newsletter">
-          <h3>Stay Connected</h3>
-          <p>Get latest updates about our AI advancements in dating.</p>
-          <form class="newsletter-form">
-            <input type="email" placeholder="Your email address">
-            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i></button>
-          </form>
-          <div class="social-links" style="margin-top: 20px; display: flex; gap: 10px;">
-            <a href="#" style="background: #1877f2;"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" style="background: #1da1f2;"><i class="fab fa-twitter"></i></a>
-            <a href="#" style="background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);"><i class="fab fa-instagram"></i></a>
-            <a href="#" style="background: #0077b5;"><i class="fab fa-linkedin-in"></i></a>
+        <div class="footer-social">
+          <h3>Connect With Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 DataMatch. All rights reserved.</p>
-        <p>Powered by advanced artificial intelligence</p>
+        <p>&copy; 2023 DataMatch. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/demo.js"></script>
-
-  <!-- Demo Mode Buttons -->
-  <div style="text-align: center; margin: 20px 0; background: linear-gradient(90deg, rgba(94,114,228,0.1), rgba(17,205,239,0.1)); padding: 15px; border-radius: 10px;">
-    <h3 style="margin-bottom: 10px; color: #5e72e4;">Try the DataMatch Experience</h3>
-    <p style="margin-bottom: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">Experience our AI-powered matching engine without creating an account</p>
-    <button id="demoLoginBtn" class="btn btn-primary btn-lg btn-icon" style="box-shadow: 0 7px 14px rgba(50,76,221,0.15); padding: 12px 25px;">
-      <i class="fas fa-rocket"></i> Launch Demo Experience
-    </button>
+  <!-- Login/Signup Form Modal -->
+  <div class="login-form-container" id="login-form-container">
+    <div class="login-form">
+      <button class="close-btn" id="close-form">&times;</button>
+      
+      <div class="form-tabs">
+        <div class="form-tab active" data-tab="login">Login</div>
+        <div class="form-tab" data-tab="signup">Sign Up</div>
+      </div>
+      
+      <div class="form-content active" id="login-content">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email</label>
+            <input type="email" id="login-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Login</button>
+        </form>
+        
+        <div class="demo-credentials">
+          <h4>Try Our Demo Account:</h4>
+          <div class="credential-item">
+            <span>Email: demo@datamatch.com</span>
+            <button class="copy-btn" data-email="demo@datamatch.com">Copy</button>
+          </div>
+          <div class="credential-item">
+            <span>Password: demo123</span>
+            <button class="copy-btn" data-password="demo123">Copy</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-content" id="signup-content">
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" required minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="signup-gender">I am a:</label>
+            <select id="signup-gender" name="gender" required>
+              <option value="">Select gender</option>
+              <option value="male">Man</option>
+              <option value="female">Woman</option>
+              <option value="non-binary">Non-binary</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="signup-looking-for">Looking to meet:</label>
+            <select id="signup-looking-for" name="lookingFor" required>
+              <option value="">Select preference</option>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="everyone">Everyone</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Create Account</button>
+        </form>
+      </div>
+    </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Modal functionality
+      const loginFormContainer = document.getElementById('login-form-container');
+      const loginBtn = document.getElementById('login-btn');
+      const getStartedBtn = document.getElementById('get-started-btn');
+      const signUpBtn = document.getElementById('sign-up-btn');
+      const tryDemoBtn = document.getElementById('try-demo-btn');
+      const closeForm = document.getElementById('close-form');
+      
+      const openModal = (tab = 'login') => {
+        loginFormContainer.classList.add('active');
+        // Set the active tab
+        document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector(`.form-tab[data-tab="${tab}"]`).classList.add('active');
+        
+        document.querySelectorAll('.form-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`${tab}-content`).classList.add('active');
+      };
+      
+      const closeModal = () => {
+        loginFormContainer.classList.remove('active');
+      };
+      
+      loginBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal('login');
+      });
+      
+      getStartedBtn.addEventListener('click', () => {
+        openModal('signup');
+      });
+      
+      signUpBtn.addEventListener('click', () => {
+        openModal('signup');
+      });
+      
+      tryDemoBtn.addEventListener('click', () => {
+        openModal('login');
+      });
+      
+      closeForm.addEventListener('click', closeModal);
+      
+      // Close modal when clicking outside
+      loginFormContainer.addEventListener('click', (e) => {
+        if (e.target === loginFormContainer) {
+          closeModal();
+        }
+      });
+      
+      // Tab switching
+      document.querySelectorAll('.form-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Update active tab
+          document.querySelectorAll('.form-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          
+          // Show appropriate content
+          const tabId = tab.getAttribute('data-tab');
+          document.querySelectorAll('.form-content').forEach(c => c.classList.remove('active'));
+          document.getElementById(`${tabId}-content`).classList.add('active');
+        });
+      });
+      
+      // Copy credentials
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          let textToCopy = '';
+          if (btn.dataset.email) {
+            textToCopy = btn.dataset.email;
+          } else if (btn.dataset.password) {
+            textToCopy = btn.dataset.password;
+          }
+          
+          if (textToCopy) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              const originalText = btn.textContent;
+              btn.textContent = 'Copied!';
+              setTimeout(() => {
+                btn.textContent = originalText;
+              }, 1500);
+            });
+          }
+        });
+      });
+      
+      // Form submission
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      
+      loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        try {
+          const response = await fetch('/api/users/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.message || 'Login failed');
+          }
+          
+          // Store the token in localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Redirect to profile page
+          window.location.href = 'profile.html';
+        } catch (error) {
+          alert(error.message || 'Failed to login. Please try again.');
+        }
+      });
+      
+      signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const name = document.getElementById('signup-name').value;
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const gender = document.getElementById('signup-gender').value;
+        const lookingFor = document.getElementById('signup-looking-for').value;
+        
+        try {
+          const response = await fetch('/api/users/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+              name, 
+              email, 
+              password,
+              gender,
+              lookingFor
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.message || 'Registration failed');
+          }
+          
+          // Store the token in localStorage
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Redirect to profile page
+          window.location.href = 'profile.html';
+        } catch (error) {
+          alert(error.message || 'Failed to register. Please try again.');
+        }
+      });
+      
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          if (this.getAttribute('href') === '#') return;
+          
+          e.preventDefault();
+          
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Check if already logged in
+      const token = localStorage.getItem('token');
+      if (token) {
+        // Update login button to show "My Profile"
+        loginBtn.textContent = 'My Profile';
+        loginBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'profile.html';
+        });
+      }
+    });
+  </script>
 </body>
 </html>

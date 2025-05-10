@@ -3,24 +3,243 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Matches - DateMatch</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <title>DataMatch - Your Matches</title>
   <link rel="stylesheet" href="css/modern.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .matches-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .match-card {
+      background-color: var(--card-color);
+      border-radius: var(--card-border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal);
+    }
+    
+    .match-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .match-photo {
+      height: 250px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .match-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-normal);
+    }
+    
+    .match-card:hover .match-photo img {
+      transform: scale(1.05);
+    }
+    
+    .match-score {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--primary);
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      box-shadow: var(--shadow-md);
+    }
+    
+    .match-info {
+      padding: 1.5rem;
+    }
+    
+    .match-name-age {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    
+    .match-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .match-age {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    
+    .match-location {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .match-bio {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      font-size: 0.875rem;
+    }
+    
+    .match-interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .interest-tag {
+      background-color: rgba(79, 70, 229, 0.1);
+      color: var(--primary);
+      border-radius: 30px;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+    }
+    
+    .match-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .match-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border: none;
+      border-radius: var(--btn-border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    
+    .btn-like {
+      background-color: var(--success);
+      color: white;
+    }
+    
+    .btn-like:hover {
+      background-color: #0d9448;
+    }
+    
+    .btn-pass {
+      background-color: var(--error);
+      color: white;
+    }
+    
+    .btn-pass:hover {
+      background-color: #c81e1e;
+    }
+    
+    .btn-message {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-message:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .search-controls {
+      margin-bottom: 2rem;
+    }
+    
+    .search-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background-color: var(--card-color);
+      padding: 1.5rem;
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .search-form .form-group {
+      flex: 1;
+      min-width: 200px;
+      margin-bottom: 0;
+    }
+    
+    .search-form .btn {
+      align-self: flex-end;
+    }
+    
+    .no-matches {
+      text-align: center;
+      padding: 3rem;
+      background-color: var(--card-color);
+      border-radius: var(--card-border-radius);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .no-matches-icon {
+      font-size: 4rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    
+    .match-reason {
+      color: var(--primary);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+    
+    .linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      background-color: #0077b5;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.75rem;
+    }
+    
+    @media (max-width: 768px) {
+      .matches-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <nav class="nav">
-        <a href="dashboard.html" class="logo">DateMatch</a>
-        <ul class="nav-links">
-          <li><a href="dashboard.html">Dashboard</a></li>
-          <li><a href="discover.html">Discover</a></li>
-          <li><a href="matches.html">Matches</a></li>
+      <div class="logo">
+        <h1>DataMatch</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="matches.html" class="active">Matches</a></li>
           <li><a href="profile.html">Profile</a></li>
-          <li><a href="#" id="logoutBtn" class="btn btn-secondary">Logout</a></li>
+          <li><a href="messages.html">Messages</a></li>
+          <li><a href="#" id="logout-btn">Logout</a></li>
         </ul>
       </nav>
     </div>
@@ -28,80 +247,411 @@
 
   <main>
     <div class="container">
-      <h1 class="section-title">Your Matches</h1>
-      <p class="section-subtitle">People who liked you back</p>
+      <h2>Your Matches</h2>
+      <p class="section-description">Discover people who share your interests and values</p>
       
-      <div class="match-tabs">
-        <button class="tab-btn active" data-tab="matches">All Matches</button>
-        <button class="tab-btn" data-tab="conversations">Conversations</button>
+      <div class="search-controls">
+        <form class="search-form" id="search-form">
+          <div class="form-group">
+            <label for="search-query">Search</label>
+            <input type="text" id="search-query" name="query" placeholder="Search by interest, job, location...">
+          </div>
+          <div class="form-group">
+            <label for="search-category">Category</label>
+            <select id="search-category" name="category">
+              <option value="general">All Categories</option>
+              <option value="interests">Interests</option>
+              <option value="profession">Career/Education</option>
+              <option value="location">Location</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="search-distance">Distance (miles)</label>
+            <select id="search-distance" name="distance">
+              <option value="5">5 miles</option>
+              <option value="10">10 miles</option>
+              <option value="25" selected>25 miles</option>
+              <option value="50">50 miles</option>
+              <option value="100">100 miles</option>
+              <option value="any">Any distance</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </form>
       </div>
       
-      <div class="tab-content" id="matches">
-        <div class="card-container" id="matchesContainer">
-          <!-- Match cards will be inserted here -->
-          <div class="no-matches-message" style="display: none;">
-            <h3>No matches yet</h3>
-            <p>Keep swiping to find your perfect match!</p>
-            <a href="discover.html" class="btn btn-primary">Discover People</a>
-          </div>
-        </div>
+      <div class="matches-container" id="matches-container">
+        <!-- Match cards will be loaded here -->
       </div>
       
-      <div class="tab-content" id="conversations" style="display: none;">
-        <div class="conversations-container" id="conversationsContainer">
-          <!-- Conversation list will be inserted here -->
-          <div class="no-conversations-message" style="display: none;">
-            <h3>No conversations yet</h3>
-            <p>Start chatting with your matches!</p>
-          </div>
+      <!-- No matches template -->
+      <div class="no-matches" id="no-matches" style="display: none;">
+        <div class="no-matches-icon">
+          <i class="far fa-frown"></i>
         </div>
+        <h3>No matches found</h3>
+        <p>Try adjusting your search criteria or update your profile to get better matches.</p>
+        <a href="profile.html" class="btn btn-primary mt-3">Update Profile</a>
       </div>
     </div>
   </main>
 
   <footer>
     <div class="container">
-      <div class="footer-bottom">
-        <p>&copy; 2025 DataMatch. All rights reserved.</p>
-        <div class="social-links">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h2>DataMatch</h2>
+          <p>Smart dating for modern singles</p>
         </div>
+        <div class="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Dating Safety</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h3>Connect With Us</h3>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 DataMatch. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
-  <!-- Match Template -->
-  <template id="matchCardTemplate">
-    <div class="profile-card match-card">
-      <img src="" class="profile-photo" alt="Profile Photo">
-      <div class="profile-info">
-        <h3 class="profile-name"></h3>
-        <p class="profile-age-location"></p>
-        <div class="profile-actions">
-          <a href="#" class="btn btn-primary message-btn">Message</a>
-          <button class="btn btn-secondary view-profile-btn">View Profile</button>
-        </div>
-      </div>
-    </div>
-  </template>
-
-  <!-- Conversation Template -->
-  <template id="conversationItemTemplate">
-    <div class="conversation-item">
-      <img src="" class="conversation-photo" alt="Profile Photo">
-      <div class="conversation-info">
-        <h4 class="conversation-name"></h4>
-        <p class="conversation-last-message"></p>
-      </div>
-      <span class="conversation-time"></span>
-    </div>
-  </template>
-
-  <script src="js/auth.js"></script>
-  <script src="js/matches.js"></script>
-  <script src="js/demo.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user is logged in
+      const token = localStorage.getItem('token');
+      if (!token) {
+        window.location.href = 'index.html';
+        return;
+      }
+      
+      const searchForm = document.getElementById('search-form');
+      const matchesContainer = document.getElementById('matches-container');
+      const noMatchesElement = document.getElementById('no-matches');
+      
+      // Load initial matches
+      loadMatches();
+      
+      // Search form submission
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        loadMatches();
+      });
+      
+      // Function to load matches
+      async function loadMatches() {
+        try {
+          const query = document.getElementById('search-query').value;
+          const category = document.getElementById('search-category').value;
+          const distance = document.getElementById('search-distance').value;
+          
+          // Save search to history
+          if (query) {
+            await saveSearchHistory(query, category);
+          }
+          
+          const response = await fetch('/api/matches/search', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-auth-token': token
+            },
+            body: JSON.stringify({
+              query,
+              category,
+              distance: distance === 'any' ? null : parseInt(distance)
+            })
+          });
+          
+          if (!response.ok) {
+            throw new Error('Failed to load matches');
+          }
+          
+          const data = await response.json();
+          
+          // Display matches
+          displayMatches(data.matches);
+        } catch (error) {
+          console.error('Error loading matches:', error);
+          showNotification('Failed to load matches. Please try again.', 'error');
+        }
+      }
+      
+      // Function to save search to history
+      async function saveSearchHistory(searchQuery, category) {
+        try {
+          await fetch('/api/users/search-history', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-auth-token': token
+            },
+            body: JSON.stringify({
+              searchQuery,
+              category
+            })
+          });
+        } catch (error) {
+          console.error('Error saving search history:', error);
+        }
+      }
+      
+      // Function to display matches
+      function displayMatches(matches) {
+        if (!matches || matches.length === 0) {
+          matchesContainer.style.display = 'none';
+          noMatchesElement.style.display = 'block';
+          return;
+        }
+        
+        matchesContainer.style.display = 'grid';
+        noMatchesElement.style.display = 'none';
+        
+        // Clear previous matches
+        matchesContainer.innerHTML = '';
+        
+        // Add match cards
+        matches.forEach(match => {
+          const matchCard = createMatchCard(match);
+          matchesContainer.appendChild(matchCard);
+        });
+        
+        // Add event listeners for match actions
+        document.querySelectorAll('.btn-like').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const matchId = this.closest('.match-card').dataset.id;
+            likeMatch(matchId);
+          });
+        });
+        
+        document.querySelectorAll('.btn-pass').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const matchId = this.closest('.match-card').dataset.id;
+            passMatch(matchId);
+          });
+        });
+        
+        document.querySelectorAll('.btn-message').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const matchId = this.closest('.match-card').dataset.id;
+            window.location.href = `messages.html?recipientId=${matchId}`;
+          });
+        });
+      }
+      
+      // Function to create a match card
+      function createMatchCard(match) {
+        const card = document.createElement('div');
+        card.className = 'match-card';
+        card.dataset.id = match.id;
+        
+        // Determine random profile photo based on gender
+        let photoUrl = 'https://randomuser.me/api/portraits/';
+        if (match.gender === 'female') {
+          const randomNum = Math.floor(Math.random() * 70) + 1;
+          photoUrl += `women/${randomNum}.jpg`;
+        } else if (match.gender === 'male') {
+          const randomNum = Math.floor(Math.random() * 70) + 1;
+          photoUrl += `men/${randomNum}.jpg`;
+        } else {
+          // Non-binary or other - use lego characters as neutral option
+          const randomNum = Math.floor(Math.random() * 8) + 1;
+          photoUrl += `lego/${randomNum}.jpg`;
+        }
+        
+        // Limit interests to 4 for display
+        const displayInterests = match.interests ? match.interests.slice(0, 4) : [];
+        
+        // Create interests HTML
+        const interestsHtml = displayInterests.map(interest => 
+          `<div class="interest-tag">${interest}</div>`
+        ).join('');
+        
+        // Create location
+        const location = match.location && match.location.address ? match.location.address : 'Unknown location';
+        
+        // LinkedIn badge
+        const linkedinBadge = match.linkedin ? 
+          `<div class="linkedin-badge"><i class="fab fa-linkedin"></i> LinkedIn Connected</div>` : '';
+        
+        card.innerHTML = `
+          <div class="match-photo">
+            <img src="${photoUrl}" alt="${match.name}">
+            <div class="match-score">${match.matchScore}%</div>
+          </div>
+          <div class="match-info">
+            <div class="match-name-age">
+              <div class="match-name">${match.name}</div>
+              <div class="match-age">${match.age || '?'}</div>
+            </div>
+            <div class="match-location">
+              <i class="fas fa-map-marker-alt"></i> ${location}
+            </div>
+            ${linkedinBadge}
+            <div class="match-reason">${match.matchReason || 'Potential match'}</div>
+            <div class="match-bio">${match.about || 'No bio available'}</div>
+            <div class="match-interests">
+              ${interestsHtml}
+            </div>
+            <div class="match-actions">
+              <button class="match-btn btn-like">
+                <i class="fas fa-heart"></i> Like
+              </button>
+              <button class="match-btn btn-pass">
+                <i class="fas fa-times"></i> Pass
+              </button>
+              <button class="match-btn btn-message">
+                <i class="fas fa-comment"></i> Message
+              </button>
+            </div>
+          </div>
+        `;
+        
+        return card;
+      }
+      
+      // Function to like a match
+      async function likeMatch(matchId) {
+        try {
+          const response = await fetch(`/api/matches/like/${matchId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-auth-token': token
+            }
+          });
+          
+          const data = await response.json();
+          
+          if (data.isMatch) {
+            showNotification('It\'s a match! You can now message each other.', 'success');
+          } else {
+            showNotification('You liked this person! They\'ll be notified if they like you back.', 'success');
+          }
+          
+          // Remove the card with animation
+          const card = document.querySelector(`.match-card[data-id="${matchId}"]`);
+          if (card) {
+            card.style.transform = 'translateX(100px)';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.remove();
+              
+              // Check if there are no more matches
+              if (matchesContainer.children.length === 0) {
+                matchesContainer.style.display = 'none';
+                noMatchesElement.style.display = 'block';
+              }
+            }, 300);
+          }
+        } catch (error) {
+          console.error('Error liking match:', error);
+          showNotification('Failed to like this profile. Please try again.', 'error');
+        }
+      }
+      
+      // Function to pass on a match
+      async function passMatch(matchId) {
+        try {
+          await fetch(`/api/matches/dislike/${matchId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-auth-token': token
+            }
+          });
+          
+          showNotification('Profile removed from your matches', 'info');
+          
+          // Remove the card with animation
+          const card = document.querySelector(`.match-card[data-id="${matchId}"]`);
+          if (card) {
+            card.style.transform = 'translateX(-100px)';
+            card.style.opacity = '0';
+            setTimeout(() => {
+              card.remove();
+              
+              // Check if there are no more matches
+              if (matchesContainer.children.length === 0) {
+                matchesContainer.style.display = 'none';
+                noMatchesElement.style.display = 'block';
+              }
+            }, 300);
+          }
+        } catch (error) {
+          console.error('Error passing on match:', error);
+          showNotification('Failed to remove this profile. Please try again.', 'error');
+        }
+      }
+      
+      // Helper function to show notifications
+      function showNotification(message, type) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+          <div class="notification-content">
+            <i class="fas ${getIconForType(type)}"></i>
+            <p>${message}</p>
+          </div>
+          <button class="notification-close">×</button>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Show with animation
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 10);
+        
+        // Auto remove after 5 seconds
+        const timeout = setTimeout(() => {
+          removeNotification(notification);
+        }, 5000);
+        
+        // Close button
+        const closeBtn = notification.querySelector('.notification-close');
+        closeBtn.addEventListener('click', () => {
+          clearTimeout(timeout);
+          removeNotification(notification);
+        });
+      }
+      
+      // Helper function to remove notification with animation
+      function removeNotification(notification) {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }
+      
+      // Helper function to get icon for notification type
+      function getIconForType(type) {
+        switch (type) {
+          case 'success': return 'fa-check-circle';
+          case 'error': return 'fa-times-circle';
+          case 'warning': return 'fa-exclamation-triangle';
+          case 'info': default: return 'fa-info-circle';
+        }
+      }
+    });
+  </script>
 </body>
 </html>
