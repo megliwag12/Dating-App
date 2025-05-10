@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Profile - DataMatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/modern.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .profile-container {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .profile-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .profile-sidebar {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .profile-main-photo {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    
+    .profile-sidebar-info {
+      padding: 20px;
+    }
+    
+    .profile-name-age {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    
+    .profile-location {
+      color: var(--gray);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .profile-location i {
+      margin-right: 5px;
+    }
+    
+    .profile-stats {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+      text-align: center;
+    }
+    
+    .profile-stat {
+      flex: 1;
+    }
+    
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+    
+    .profile-content {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    
+    .profile-section {
+      margin-bottom: 30px;
+    }
+    
+    .profile-section h2 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      border-bottom: 1px solid var(--light-gray);
+      padding-bottom: 10px;
+    }
+    
+    .profile-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .gallery-image {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    
+    .gallery-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .add-photo-btn {
+      width: 100%;
+      height: 150px;
+      border: 2px dashed var(--light-gray);
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .add-photo-btn:hover {
+      background-color: var(--light-gray);
+    }
+    
+    .add-photo-btn i {
+      font-size: 2rem;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .interest-tag {
+      background-color: var(--light-gray);
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .interest-tag i {
+      margin-left: 5px;
+      cursor: pointer;
+      color: var(--gray);
+    }
+    
+    .interest-tag i:hover {
+      color: var(--danger);
+    }
+    
+    .add-interest {
+      background-color: white;
+      border: 1px dashed var(--gray);
+      color: var(--gray);
+    }
+    
+    .preference-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .preference-label {
+      font-weight: 500;
+    }
+    
+    .preference-value {
+      color: var(--gray);
+    }
+    
+    .edit-btn {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .edit-btn i {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="dashboard.html" class="logo">DataMatch</a>
+        <ul class="nav-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="discover.html">Discover</a></li>
+          <li><a href="matches.html">Matches</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" id="logoutBtn" class="btn btn-secondary">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="profile-container">
+        <div class="profile-sidebar">
+          <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Profile Photo" class="profile-main-photo" id="profilePhoto">
+
+          <div class="profile-sidebar-info">
+            <h1 class="profile-name-age"><span id="profileName">Demo User</span>, <span id="profileAge">25</span></h1>
+            <div class="profile-location"><i class="fas fa-map-marker-alt"></i> <span id="profileLocation">San Francisco</span></div>
+            <div id="job-info" style="margin-bottom: 15px; color: var(--gray);">
+              <div id="jobTitle" style="font-weight: 500;">AI Research Scientist</div>
+              <div id="company">TechInnovate</div>
+            </div>
+
+            <div class="profile-social" style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px;">
+              <a href="#" id="linkedinProfile" target="_blank" style="color: #0077b5; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+              <a href="#" id="twitterProfile" target="_blank" style="color: #1da1f2; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+              <a href="#" id="instagramProfile" target="_blank" style="color: #e1306c; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+            </div>
+
+            <div class="profile-stats">
+              <div class="profile-stat">
+                <div class="stat-value">42</div>
+                <div class="stat-label">Views</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Likes</div>
+              </div>
+              <div class="profile-stat">
+                <div class="stat-value">3</div>
+                <div class="stat-label">Matches</div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-bottom: 15px;"><i class="fas fa-edit"></i> Edit Profile</button>
+            <button class="btn btn-secondary" style="width: 100%;"><i class="fas fa-cog"></i> Settings</button>
+          </div>
+        </div>
+
+        <div class="profile-content">
+          <div class="profile-section">
+            <h2>About Me</h2>
+            <p id="profileBio">Tech enthusiast and nature lover. Working in AI and looking for meaningful connections.</p>
+            <div id="educationInfo" style="margin-top: 10px; font-style: italic; color: var(--gray);">
+              Ph.D. in Computer Science, Stanford University
+            </div>
+            <button class="edit-btn btn btn-secondary"><i class="fas fa-edit"></i> Edit</button>
+          </div>
+
+          <div class="profile-section">
+            <h2>Photos</h2>
+            <p>Add photos to increase your chances of getting matches</p>
+
+            <div class="profile-gallery" id="photoGallery">
+              <img src="https://randomuser.me/api/portraits/lego/1.jpg" alt="Gallery Photo" class="gallery-image">
+              <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="Gallery Photo" class="gallery-image">
+              <div class="add-photo-btn">
+                <i class="fas fa-plus"></i>
+                <span>Add Photo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h2>Interests</h2>
+            <p>These interests help our AI match you with compatible people</p>
+
+            <div class="interest-tags" id="interestTags">
+              <!-- Interest tags will be inserted here -->
+              <div class="interest-tag add-interest">
+                <span>Add Interest</span>
+                <i class="fas fa-plus"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h2><i class="far fa-calendar-alt"></i> Availability Calendar</h2>
+            <p>Let potential matches know when you're free for dates</p>
+
+            <div class="calendar-container" style="margin-top: 20px; background: var(--lighter-gray); padding: 20px; border-radius: 10px;">
+              <div class="calendar-header" style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin: 0; font-size: 1.2rem;">My Available Times</h3>
+                <button class="btn btn-sm btn-secondary"><i class="fas fa-plus"></i> Add Time Slot</button>
+              </div>
+
+              <div class="calendar-days" id="availabilityCalendar">
+                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
+                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Friday</div>
+                  <div class="time-slots">
+                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
+                      19:00 - 22:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
+                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Saturday</div>
+                  <div class="time-slots">
+                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
+                      10:00 - 14:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
+                    </span>
+                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
+                      18:00 - 22:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="calendar-day" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);">
+                  <div class="day-name" style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">Sunday</div>
+                  <div class="time-slots">
+                    <span class="time-slot" style="display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);">
+                      11:00 - 18:00 <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <h4 style="margin-bottom: 10px; font-size: 1.1rem;">Preferred Date Activities</h4>
+              <div class="date-activities" id="dateActivities" style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Coffee</span>
+                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Dinner</span>
+                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Hiking</span>
+                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Museum</span>
+                <span class="activity-tag" style="background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;">Concert</span>
+                <span class="add-activity" style="background: transparent; border: 1px dashed var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer;">
+                  <i class="fas fa-plus" style="margin-right: 5px;"></i> Add
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h2><i class="fas fa-map-marker-alt"></i> Location</h2>
+            <p>Your location helps us find matches in your area</p>
+
+            <div class="location-container" style="position: relative; margin-top: 20px; height: 300px; background: var(--lighter-gray); border-radius: 10px; overflow: hidden;">
+              <!-- Embed a map for demonstration -->
+              <iframe
+                width="100%"
+                height="100%"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=-122.4194%2C37.7749%2C-122.4194%2C37.7749&amp;layer=mapnik&amp;marker=37.7749%2C-122.4194"
+                style="border: none; border-radius: 10px;">
+              </iframe>
+
+              <div class="map-overlay" style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255,255,255,0.9); padding: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <div>
+                    <div style="font-weight: 600;">Current Location:</div>
+                    <div>San Francisco, CA</div>
+                  </div>
+                  <button class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i> Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-section">
+            <h2>Matching Preferences</h2>
+            <p>Set your preferences to help our AI find better matches</p>
+
+            <div class="preferences-list">
+              <div class="preference-item">
+                <div class="preference-label">Interested in</div>
+                <div class="preference-value" id="genderPreference">Women, Men, Non-binary</div>
+              </div>
+              <div class="preference-item">
+                <div class="preference-label">Age Range</div>
+                <div class="preference-value" id="ageRange">18 - 40 years</div>
+              </div>
+              <div class="preference-item">
+                <div class="preference-label">Maximum Distance</div>
+                <div class="preference-value" id="maxDistance">50 km</div>
+              </div>
+            </div>
+
+            <button class="edit-btn btn btn-secondary"><i class="fas fa-edit"></i> Edit Preferences</button>
+          </div>
+
+          <div class="profile-section">
+            <h2>AI-Powered Match Insights</h2>
+            <p>Based on your profile and activity, our AI has generated these insights</p>
+
+            <div class="match-insights">
+              <div class="insight-item">
+                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
+                Your LinkedIn profile increases your match quality by 45%
+              </div>
+              <div class="insight-item">
+                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
+                Setting availability on weekends has increased your match rate by 30%
+              </div>
+              <div class="insight-item">
+                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
+                Your professional background is highly compatible with 65% of users in your area
+              </div>
+              <div class="insight-item">
+                <i class="fas fa-lightbulb" style="color: var(--primary); margin-right: 10px;"></i>
+                Adding more photos can increase your profile views by 40%
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 DataMatch. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/demo.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load user data from localStorage
+      const userData = JSON.parse(localStorage.getItem('user') || '{}');
+
+      // Update profile information
+      if (userData && userData.profile) {
+        // Basic profile details
+        document.getElementById('profileName').textContent = userData.profile.name || 'Demo User';
+        document.getElementById('profileAge').textContent = userData.profile.age || '25';
+        document.getElementById('profileLocation').textContent = userData.profile.location || 'San Francisco';
+        document.getElementById('profileBio').textContent = userData.profile.bio || 'Tech enthusiast and nature lover.';
+
+        // Professional details
+        if (document.getElementById('jobTitle')) {
+          document.getElementById('jobTitle').textContent = userData.profile.jobTitle || 'AI Research Scientist';
+        }
+        if (document.getElementById('company')) {
+          document.getElementById('company').textContent = userData.profile.company || 'TechInnovate';
+        }
+        if (document.getElementById('educationInfo')) {
+          document.getElementById('educationInfo').textContent = userData.profile.education || 'Ph.D. in Computer Science, Stanford University';
+        }
+
+        // Social profiles
+        if (userData.profile.socialProfiles) {
+          if (userData.profile.socialProfiles.linkedin) {
+            document.getElementById('linkedinProfile').href = userData.profile.socialProfiles.linkedin;
+          }
+          if (userData.profile.socialProfiles.twitter) {
+            document.getElementById('twitterProfile').href = 'https://twitter.com/' +
+              (userData.profile.socialProfiles.twitter.startsWith('@') ?
+               userData.profile.socialProfiles.twitter.substring(1) :
+               userData.profile.socialProfiles.twitter);
+          }
+          if (userData.profile.socialProfiles.instagram) {
+            document.getElementById('instagramProfile').href = 'https://instagram.com/' +
+              (userData.profile.socialProfiles.instagram.startsWith('@') ?
+               userData.profile.socialProfiles.instagram.substring(1) :
+               userData.profile.socialProfiles.instagram);
+          }
+        }
+
+        // Profile photos
+        if (userData.profile.photos && userData.profile.photos.length > 0) {
+          // Update main profile photo
+          document.getElementById('profilePhoto').src = userData.profile.photos[0].url;
+
+          // Update photo gallery
+          const photoGallery = document.getElementById('photoGallery');
+          if (photoGallery) {
+            // Clear existing photos except the add button
+            const addPhotoBtn = photoGallery.querySelector('.add-photo-btn');
+            photoGallery.innerHTML = '';
+
+            // Add all user photos
+            userData.profile.photos.forEach(photo => {
+              const img = document.createElement('img');
+              img.src = photo.url;
+              img.alt = 'Profile Photo';
+              img.className = 'gallery-image';
+              photoGallery.appendChild(img);
+            });
+
+            // Add the "Add Photo" button back
+            photoGallery.appendChild(addPhotoBtn);
+          }
+        }
+
+        // Update interests
+        const interestTags = document.getElementById('interestTags');
+        if (interestTags) {
+          const addInterestTag = interestTags.querySelector('.add-interest');
+
+          // Clear existing interest tags except the "Add Interest" button
+          interestTags.innerHTML = '';
+
+          // Add user interests
+          if (userData.profile.interests && userData.profile.interests.length > 0) {
+            userData.profile.interests.forEach(interest => {
+              const interestTag = document.createElement('div');
+              interestTag.className = 'interest-tag';
+              interestTag.innerHTML = `
+                <span>${interest}</span>
+                <i class="fas fa-times"></i>
+              `;
+              interestTags.appendChild(interestTag);
+            });
+          }
+
+          // Add the "Add Interest" button back
+          interestTags.appendChild(addInterestTag || document.createElement('div'));
+        }
+
+        // Update calendar availability
+        if (userData.profile.calendar && userData.profile.calendar.availability) {
+          const calendarDiv = document.getElementById('availabilityCalendar');
+          if (calendarDiv) {
+            calendarDiv.innerHTML = '';
+
+            userData.profile.calendar.availability.forEach(dayAvail => {
+              const dayDiv = document.createElement('div');
+              dayDiv.className = 'calendar-day';
+              dayDiv.style = 'margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);';
+
+              // Day name
+              const dayNameDiv = document.createElement('div');
+              dayNameDiv.className = 'day-name';
+              dayNameDiv.style = 'font-weight: 600; margin-bottom: 8px; color: var(--primary);';
+              dayNameDiv.textContent = dayAvail.day;
+              dayDiv.appendChild(dayNameDiv);
+
+              // Time slots
+              const timeSlotsDiv = document.createElement('div');
+              timeSlotsDiv.className = 'time-slots';
+
+              dayAvail.timeSlots.forEach(slot => {
+                const timeSlotSpan = document.createElement('span');
+                timeSlotSpan.className = 'time-slot';
+                timeSlotSpan.style = 'display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);';
+                timeSlotSpan.innerHTML = `${slot.startTime} - ${slot.endTime} <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>`;
+                timeSlotsDiv.appendChild(timeSlotSpan);
+              });
+
+              dayDiv.appendChild(timeSlotsDiv);
+              calendarDiv.appendChild(dayDiv);
+            });
+          }
+
+          // Update preferred date activities
+          const activitiesDiv = document.getElementById('dateActivities');
+          if (activitiesDiv && userData.profile.calendar.preferredDateActivities) {
+            // Keep the "Add" button
+            const addActivityBtn = activitiesDiv.querySelector('.add-activity');
+            activitiesDiv.innerHTML = '';
+
+            // Add all activities
+            userData.profile.calendar.preferredDateActivities.forEach(activity => {
+              const activityTag = document.createElement('span');
+              activityTag.className = 'activity-tag';
+              activityTag.style = 'background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;';
+              activityTag.textContent = activity;
+              activitiesDiv.appendChild(activityTag);
+            });
+
+            // Add the "Add" button back
+            if (addActivityBtn) {
+              activitiesDiv.appendChild(addActivityBtn);
+            } else {
+              const newAddBtn = document.createElement('span');
+              newAddBtn.className = 'add-activity';
+              newAddBtn.style = 'background: transparent; border: 1px dashed var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer;';
+              newAddBtn.innerHTML = '<i class="fas fa-plus" style="margin-right: 5px;"></i> Add';
+              activitiesDiv.appendChild(newAddBtn);
+            }
+          }
+        }
+
+        // Update map if coordinates are available
+        if (userData.profile.coordinates) {
+          const iframe = document.querySelector('.location-container iframe');
+          if (iframe) {
+            const lat = userData.profile.coordinates.latitude;
+            const lng = userData.profile.coordinates.longitude;
+            iframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng}%2C${lat}%2C${lng}%2C${lat}&amp;layer=mapnik&amp;marker=${lat}%2C${lng}`;
+          }
+        }
+
+        // Update preferences
+        if (userData.profile.preferences) {
+          // Gender preference
+          const genderPref = userData.profile.preferences.genderPreference || [];
+          if (document.getElementById('genderPreference')) {
+            document.getElementById('genderPreference').textContent =
+              genderPref.length > 0
+                ? genderPref.map(g => g.charAt(0).toUpperCase() + g.slice(1)).join(', ')
+                : 'Everyone';
+          }
+
+          // Age range
+          const minAge = userData.profile.preferences.minAge || 18;
+          const maxAge = userData.profile.preferences.maxAge || 40;
+          if (document.getElementById('ageRange')) {
+            document.getElementById('ageRange').textContent = `${minAge} - ${maxAge} years`;
+          }
+
+          // Distance
+          const maxDistance = userData.profile.preferences.maxDistance || 50;
+          if (document.getElementById('maxDistance')) {
+            document.getElementById('maxDistance').textContent = `${maxDistance} km`;
+          }
+        }
+      }
+
+      // Event handlers
+
+      // Add interest button
+      const addInterestBtn = document.querySelector('.add-interest');
+      if (addInterestBtn) {
+        addInterestBtn.addEventListener('click', function() {
+          const interest = prompt('Enter a new interest:');
+          if (interest && interest.trim()) {
+            const interestTag = document.createElement('div');
+            interestTag.className = 'interest-tag';
+            interestTag.innerHTML = `
+              <span>${interest}</span>
+              <i class="fas fa-times"></i>
+            `;
+
+            const interestTags = document.getElementById('interestTags');
+            interestTags.insertBefore(interestTag, addInterestBtn);
+
+            // Add event listener to remove button
+            const removeBtn = interestTag.querySelector('i');
+            removeBtn.addEventListener('click', function() {
+              interestTag.remove();
+            });
+          }
+        });
+      }
+
+      // Add time slot button
+      const addTimeSlotBtn = document.querySelector('.calendar-header button');
+      if (addTimeSlotBtn) {
+        addTimeSlotBtn.addEventListener('click', function() {
+          const day = prompt('Enter day of week (e.g., Monday):');
+          const startTime = prompt('Enter start time (e.g., 18:00):');
+          const endTime = prompt('Enter end time (e.g., 22:00):');
+
+          if (day && startTime && endTime) {
+            // Check if day already exists
+            let dayDiv = null;
+            const days = document.querySelectorAll('.calendar-day');
+            for (let i = 0; i < days.length; i++) {
+              if (days[i].querySelector('.day-name').textContent.toLowerCase() === day.toLowerCase()) {
+                dayDiv = days[i];
+                break;
+              }
+            }
+
+            // Create new day if it doesn't exist
+            if (!dayDiv) {
+              dayDiv = document.createElement('div');
+              dayDiv.className = 'calendar-day';
+              dayDiv.style = 'margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--light-gray);';
+
+              const dayNameDiv = document.createElement('div');
+              dayNameDiv.className = 'day-name';
+              dayNameDiv.style = 'font-weight: 600; margin-bottom: 8px; color: var(--primary);';
+              dayNameDiv.textContent = day;
+              dayDiv.appendChild(dayNameDiv);
+
+              const timeSlotsDiv = document.createElement('div');
+              timeSlotsDiv.className = 'time-slots';
+              dayDiv.appendChild(timeSlotsDiv);
+
+              document.getElementById('availabilityCalendar').appendChild(dayDiv);
+            }
+
+            // Add time slot
+            const timeSlotSpan = document.createElement('span');
+            timeSlotSpan.className = 'time-slot';
+            timeSlotSpan.style = 'display: inline-block; background: white; padding: 5px 10px; border-radius: 5px; margin-right: 8px; margin-bottom: 8px; font-size: 0.9rem; box-shadow: var(--shadow-sm);';
+            timeSlotSpan.innerHTML = `${startTime} - ${endTime} <i class="fas fa-times" style="margin-left: 5px; cursor: pointer; color: var(--gray);"></i>`;
+
+            dayDiv.querySelector('.time-slots').appendChild(timeSlotSpan);
+
+            // Add event listener to remove button
+            const removeBtn = timeSlotSpan.querySelector('i');
+            removeBtn.addEventListener('click', function() {
+              timeSlotSpan.remove();
+
+              // If this was the last time slot for the day, remove the day
+              if (dayDiv.querySelector('.time-slots').children.length === 0) {
+                dayDiv.remove();
+              }
+            });
+          }
+        });
+      }
+
+      // Add activity button
+      const addActivityBtn = document.querySelector('.add-activity');
+      if (addActivityBtn) {
+        addActivityBtn.addEventListener('click', function() {
+          const activity = prompt('Enter a preferred date activity:');
+          if (activity && activity.trim()) {
+            const activityTag = document.createElement('span');
+            activityTag.className = 'activity-tag';
+            activityTag.style = 'background: var(--primary); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem;';
+            activityTag.textContent = activity;
+
+            document.getElementById('dateActivities').insertBefore(activityTag, addActivityBtn);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

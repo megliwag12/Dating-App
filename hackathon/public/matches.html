@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Matches - DateMatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/modern.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="dashboard.html" class="logo">DateMatch</a>
+        <ul class="nav-links">
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="discover.html">Discover</a></li>
+          <li><a href="matches.html">Matches</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="#" id="logoutBtn" class="btn btn-secondary">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <h1 class="section-title">Your Matches</h1>
+      <p class="section-subtitle">People who liked you back</p>
+      
+      <div class="match-tabs">
+        <button class="tab-btn active" data-tab="matches">All Matches</button>
+        <button class="tab-btn" data-tab="conversations">Conversations</button>
+      </div>
+      
+      <div class="tab-content" id="matches">
+        <div class="card-container" id="matchesContainer">
+          <!-- Match cards will be inserted here -->
+          <div class="no-matches-message" style="display: none;">
+            <h3>No matches yet</h3>
+            <p>Keep swiping to find your perfect match!</p>
+            <a href="discover.html" class="btn btn-primary">Discover People</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tab-content" id="conversations" style="display: none;">
+        <div class="conversations-container" id="conversationsContainer">
+          <!-- Conversation list will be inserted here -->
+          <div class="no-conversations-message" style="display: none;">
+            <h3>No conversations yet</h3>
+            <p>Start chatting with your matches!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2025 DataMatch. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Match Template -->
+  <template id="matchCardTemplate">
+    <div class="profile-card match-card">
+      <img src="" class="profile-photo" alt="Profile Photo">
+      <div class="profile-info">
+        <h3 class="profile-name"></h3>
+        <p class="profile-age-location"></p>
+        <div class="profile-actions">
+          <a href="#" class="btn btn-primary message-btn">Message</a>
+          <button class="btn btn-secondary view-profile-btn">View Profile</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Conversation Template -->
+  <template id="conversationItemTemplate">
+    <div class="conversation-item">
+      <img src="" class="conversation-photo" alt="Profile Photo">
+      <div class="conversation-info">
+        <h4 class="conversation-name"></h4>
+        <p class="conversation-last-message"></p>
+      </div>
+      <span class="conversation-time"></span>
+    </div>
+  </template>
+
+  <script src="js/auth.js"></script>
+  <script src="js/matches.js"></script>
+  <script src="js/demo.js"></script>
+</body>
+</html>
